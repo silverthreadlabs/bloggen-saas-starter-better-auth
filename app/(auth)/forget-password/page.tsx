@@ -44,7 +44,7 @@ export default function Component() {
 	if (isSubmitted) {
 		return (
 			<main className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)]">
-				<Card className="w-[350px]">
+				<Card className="max-w-80 w-full">
 					<CardHeader>
 						<CardTitle>Check your email</CardTitle>
 						<CardDescription>

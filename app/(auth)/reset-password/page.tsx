@@ -37,9 +37,10 @@ export default function ResetPassword() {
 		setIsSubmitting(false);
 		router.push("/sign-in");
 	}
+
 	return (
 		<div className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)]">
-			<Card className="max-w-sm w-full">
+			<Card className="max-w-80 w-full">
 				<CardHeader>
 					<CardTitle>Reset password</CardTitle>
 					<CardDescription>

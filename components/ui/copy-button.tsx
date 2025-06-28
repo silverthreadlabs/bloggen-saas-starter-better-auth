@@ -18,6 +18,7 @@ export default function CopyButton({ textToCopy }: CopyButtonProps) {
 	useEffect(() => {
 		if (isCopied) {
 			const timer = setTimeout(() => setIsCopied(false), 2000);
+			
 			return () => clearTimeout(timer);
 		}
 	}, [isCopied]);

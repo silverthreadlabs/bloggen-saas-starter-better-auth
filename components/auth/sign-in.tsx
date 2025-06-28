@@ -39,18 +39,22 @@ export default function SignIn() {
   const handleEmailSignIn = async () => {
     if (!email.trim()) {
       toast.error("Please enter your email");
+
       return;
     }
     if (!isValidEmail(email)) {
       toast.error("Please enter a valid email address");
+
       return;
     }
     if (!password.trim()) {
       toast.error("Please enter your password");
+
       return;
     }
     if (!isValidPassword(password)) {
       toast.error("Password must be at least 6 characters");
+      
       return;
     }
 

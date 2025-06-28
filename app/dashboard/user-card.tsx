@@ -28,7 +28,7 @@ import { PasswordInput } from '@/components/ui/password-input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { client, signOut, useSession } from '@/lib/auth/auth-client';
 import { Session } from '@/lib/auth/auth-types';
-import { Subscription } from '@better-auth/stripe';
+// import { Subscription } from '@better-auth/stripe';
 import { MobileIcon } from '@radix-ui/react-icons';
 import { useQuery } from '@tanstack/react-query';
 
@@ -51,10 +51,15 @@ import QRCode from 'react-qr-code';
 import { toast } from 'sonner';
 import { UAParser } from 'ua-parser-js';
 
+interface SubscriptionData {
+    plan?: string;
+    status?: string;
+}
+
 export default function UserCard(props: {
     session: Session | null;
     activeSessions: Session['session'][];
-    subscription?: Subscription;
+    subscription?: unknown;
 }) {
     const router = useRouter();
     const { data, isPending } = useSession();
@@ -78,6 +83,7 @@ export default function UserCard(props: {
                     throw: true
                 }
             });
+
             return res.length ? res[0] : null;
         }
     });
@@ -123,11 +129,11 @@ export default function UserCard(props: {
                     </div>
                     <div className='flex items-center justify-between'>
                         <div>
-                            <SubscriptionTierLabel tier={subscription?.plan?.toLowerCase() as 'starter'} />
+                            <SubscriptionTierLabel tier={(subscription as SubscriptionData)?.plan?.toLowerCase() as 'starter'} />
                         </div>
                         <Component
-                            currentPlan={subscription?.plan?.toLowerCase() as 'starter'}
-                            isTrial={subscription?.status === 'trialing'}
+                            currentPlan={(subscription as SubscriptionData)?.plan?.toLowerCase() as 'starter'}
+                            isTrial={(subscription as SubscriptionData)?.status === 'trialing'}
                         />
                     </div>
                 </div>
@@ -261,6 +267,7 @@ export default function UserCard(props: {
                                                     onClick={async () => {
                                                         if (twoFaPassword.length < 8) {
                                                             toast.error('Password must be at least 8 characters');
+
                                                             return;
                                                         }
                                                         await client.twoFactor.getTotpUri(
@@ -286,6 +293,7 @@ export default function UserCard(props: {
                                 <DialogTrigger asChild>
                                     <Button
                                         variant={session?.user.twoFactorEnabled ? 'destructive' : 'outline'}
+                                        size='default'
                                         leadingIcon={
                                             session?.user.twoFactorEnabled ? (
                                                 <ShieldOff size={16} />
@@ -293,7 +301,7 @@ export default function UserCard(props: {
                                                 <ShieldCheck size={16} />
                                             )
                                         }>
-                                        {session?.user.twoFactorEnabled ? 'Disable 2FA' : 'Enable 2FA'}
+                                        {`${session?.user.twoFactorEnabled ? 'Disable' : 'Enable'} 2FA`}
                                     </Button>
                                 </DialogTrigger>
                                 <DialogContent className='w-11/12 sm:max-w-[425px]'>
@@ -342,12 +350,12 @@ export default function UserCard(props: {
                                             onClick={async () => {
                                                 if (twoFaPassword.length < 8 && !twoFactorVerifyURI) {
                                                     toast.error('Password must be at least 8 characters');
+
                                                     return;
                                                 }
                                                 setIsPendingTwoFa(true);
                                                 if (session?.user.twoFactorEnabled) {
                                                     const res = await client.twoFactor.disable({
-                                                        //@ts-ignore
                                                         password: twoFaPassword,
                                                         fetchOptions: {
                                                             onError(context) {
@@ -378,6 +386,7 @@ export default function UserCard(props: {
                                                                 }
                                                             }
                                                         });
+
                                                         return;
                                                     }
                                                     const res = await client.twoFactor.enable({
@@ -468,6 +477,7 @@ function ChangePassword() {
     const [loading, setLoading] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const [signOutDevices, setSignOutDevices] = useState<boolean>(false);
+
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
@@ -528,10 +538,12 @@ function ChangePassword() {
                         onClick={async () => {
                             if (newPassword !== confirmPassword) {
                                 toast.error('Passwords do not match');
+
                                 return;
                             }
                             if (newPassword.length < 8) {
                                 toast.error('Password must be at least 8 characters');
+
                                 return;
                             }
                             setLoading(true);
@@ -580,6 +592,7 @@ function EditUserDialog() {
     };
     const [open, setOpen] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
@@ -673,6 +686,7 @@ function AddPasskey() {
     const handleAddPasskey = async () => {
         if (!passkeyName) {
             toast.error('Passkey name is required');
+
             return;
         }
         setIsLoading(true);
@@ -687,6 +701,7 @@ function AddPasskey() {
         }
         setIsLoading(false);
     };
+
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
@@ -733,6 +748,7 @@ function ListPasskeys() {
     const handleAddPasskey = async () => {
         if (!passkeyName) {
             toast.error('Passkey name is required');
+
             return;
         }
         setIsLoading(true);
@@ -748,6 +764,7 @@ function ListPasskeys() {
     };
     const [isLoading, setIsLoading] = useState(false);
     const [isDeletePasskey, setIsDeletePasskey] = useState<boolean>(false);
+    
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
