@@ -1,15 +1,15 @@
 <div align="center">
-<a href="https://www.bloggen.dev"><h1>Bloggen - SEO Starter</h1></a>
+<a href="https://www.bloggen.dev"><h1>Bloggen - SaaS Starter [Better Auth]</h1></a>
   
 <a href="https://www.silverthreadlabs.com"><img alt="Made by Silverthread Labs" src="https://img.shields.io/badge/MADE%20BY%20SILVERTHREAD%20LABS-000000.svg?style=for-the-badge&labelColor=000000"></a>
-<a href="https://www.npmjs.com/package/create-bloggen-app"><img alt="NPM version" src="https://img.shields.io/badge/NPM-v1.0.5-blue.svg?style=for-the-badge&labelColor=000000"></a>
+<a href="https://www.npmjs.com/package/create-bloggen-app"><img alt="NPM version" src="https://img.shields.io/badge/NPM-v1.0.0-blue.svg?style=for-the-badge&labelColor=000000"></a>
 <a href=""><img alt="License" src="https://img.shields.io/npm/l/next.svg?style=for-the-badge&labelColor=000000"></a>
 <a href="https://www.reddit.com/r/DukeOfAllTrades/"><img alt="Join the community on Reddit" src="https://img.shields.io/badge/Join%20the%20community-blueviolet.svg?style=for-the-badge&logo=reddit&labelColor=000&logoColor=fff"></a>
 </div>
 
 
 
-**Bloggen SEO Starter** is a fast, minimal Next.js template for building SEO-optimized, content-rich websites—not just blogs. It’s the first official starter in the Bloggen.dev ecosystem, showcasing how to use general-purpose MDX architecture to power full websites, dynamic pages, and web apps with structured content.
+**Bloggen - SaaS Starter [Better Auth]** is a fast, minimal Next.js template for building SEO-optimized, content-rich websites—not just blogs. It’s the first official starter in the Bloggen.dev ecosystem, showcasing how to use general-purpose MDX architecture to power full websites, dynamic pages, and web apps with structured content.
 
 Built with MDX powered by **Fumadocs**, it lets you create flexible routes like `/blog`, `/docs`, `/services`, or `/product/x`—all content-driven, fully typed, and SEO-ready out of the box.
 
