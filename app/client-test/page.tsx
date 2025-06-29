@@ -49,7 +49,7 @@ export default function ClientTest() {
 	};
 
 	return (
-		<div className="w-full min-h-screen max-w-7xl mx-auto py-10 sm:py-16 space-y-8">
+		<div className="w-full min-h-screen max-w-7xl mx-auto py-10 px-4 sm:px-0 sm:py-16 space-y-8">
 			<h1 className="text-2xl font-bold text-center">
 				Client Authentication Test
 			</h1>

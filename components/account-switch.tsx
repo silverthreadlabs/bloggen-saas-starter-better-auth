@@ -28,6 +28,7 @@ export default function AccountSwitcher({
 	const { data: currentUser } = useSession();
 	const [open, setOpen] = useState(false);
 	const router = useRouter();
+	
 	return (
 		<Popover open={open} onOpenChange={setOpen}>
 			<PopoverTrigger asChild>

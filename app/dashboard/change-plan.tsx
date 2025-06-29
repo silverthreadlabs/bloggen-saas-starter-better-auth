@@ -21,6 +21,7 @@ function Component(props: {
 }) {
 	const [selectedPlan, setSelectedPlan] = useState("starter");
 	const id = useId();
+	
 	return (
 		<Dialog>
 			<DialogTrigger asChild>

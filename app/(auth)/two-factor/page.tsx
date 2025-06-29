@@ -21,29 +21,31 @@ export default function Component() {
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState(false);
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		if (totpCode.length !== 6 || !/^\d+$/.test(totpCode)) {
 			setError("TOTP code must be 6 digits");
+			
 			return;
 		}
-		client.twoFactor
-			.verifyTotp({
+		try {
+			const res = await client.twoFactor.verifyTotp({
 				code: totpCode,
-			})
-			.then((res) => {
-				if (res.data?.token) {
-					setSuccess(true);
-					setError("");
-				} else {
-					setError("Invalid TOTP code");
-				}
 			});
+			if (res.data?.token) {
+				setSuccess(true);
+				setError("");
+			} else {
+				setError("Invalid TOTP code");
+			}
+		} catch (error) {
+			setError("An error occurred during verification");
+		}
 	};
 
 	return (
 		<main className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)]">
-			<Card className="max-w-sm w-full">
+			<Card className="max-w-80 w-full">
 				<CardHeader>
 					<CardTitle>TOTP Verification</CardTitle>
 					<CardDescription>
@@ -73,7 +75,7 @@ export default function Component() {
 									<span className="text-sm">{error}</span>
 								</div>
 							)}
-							<Button type="submit" className="mt-4" size="default" fullWidth variant="solid">
+							<Button type="submit" className="mt-4" size="default" fullWidth variant="solid" disabled={totpCode.length !== 6 || !/^\d+$/.test(totpCode)}>
 								Verify
 							</Button>
 						</form>

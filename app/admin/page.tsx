@@ -54,6 +54,7 @@ type User = {
 	email: string;
 	name: string;
 	role: "admin" | "user";
+	banned?: boolean;
 };
 
 export default function AdminDashboard() {
@@ -89,6 +90,7 @@ export default function AdminDashboard() {
 					throw: true,
 				},
 			);
+			
 			return data?.users || [];
 		},
 	});
@@ -109,8 +111,9 @@ export default function AdminDashboard() {
 			queryClient.invalidateQueries({
 				queryKey: ["users"],
 			});
-		} catch (error: any) {
-			toast.error(error.message || "Failed to create user");
+		} catch (error: unknown) {
+			const errorMessage = error instanceof Error ? error.message : "Failed to create user";
+			toast.error(errorMessage);
 		} finally {
 			setIsLoading(undefined);
 		}
@@ -124,8 +127,9 @@ export default function AdminDashboard() {
 			queryClient.invalidateQueries({
 				queryKey: ["users"],
 			});
-		} catch (error: any) {
-			toast.error(error.message || "Failed to delete user");
+		} catch (error: unknown) {
+			const errorMessage = error instanceof Error ? error.message : "Failed to delete user";
+			toast.error(errorMessage);
 		} finally {
 			setIsLoading(undefined);
 		}
@@ -136,8 +140,9 @@ export default function AdminDashboard() {
 		try {
 			await client.admin.revokeUserSessions({ userId: id });
 			toast.success("Sessions revoked for user");
-		} catch (error: any) {
-			toast.error(error.message || "Failed to revoke sessions");
+		} catch (error: unknown) {
+			const errorMessage = error instanceof Error ? error.message : "Failed to revoke sessions";
+			toast.error(errorMessage);
 		} finally {
 			setIsLoading(undefined);
 		}
@@ -149,8 +154,9 @@ export default function AdminDashboard() {
 			await client.admin.impersonateUser({ userId: id });
 			toast.success("Impersonated user");
 			router.push("/dashboard");
-		} catch (error: any) {
-			toast.error(error.message || "Failed to impersonate user");
+		} catch (error: unknown) {
+			const errorMessage = error instanceof Error ? error.message : "Failed to impersonate user";
+			toast.error(errorMessage);
 		} finally {
 			setIsLoading(undefined);
 		}
@@ -173,23 +179,24 @@ export default function AdminDashboard() {
 			queryClient.invalidateQueries({
 				queryKey: ["users"],
 			});
-		} catch (error: any) {
-			toast.error(error.message || "Failed to ban user");
+		} catch (error: unknown) {
+			const errorMessage = error instanceof Error ? error.message : "Failed to ban user";
+			toast.error(errorMessage);
 		} finally {
 			setIsLoading(undefined);
 		}
 	};
 
 	return (
-		<div className="w-full min-h-screen max-w-7xl mx-auto space-y-8 py-10 sm:py-16">
+		<div className="w-full min-h-screen max-w-7xl mx-auto space-y-8 py-10 px-4 sm:px-0 sm:py-16">
 			<Toaster richColors />
 			<Card>
 				<CardHeader className="flex flex-row items-center justify-between">
 					<CardTitle className="text-2xl">Admin Dashboard</CardTitle>
 					<Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
 						<DialogTrigger asChild>
-							<Button size="default" variant="solid">
-								<Plus className="mr-2 h-4 w-4" /> Create User
+							<Button size="default" variant="solid" leadingIcon={<Plus className="mr-2 h-4 w-4" />}>
+								Create User
 							</Button>
 						</DialogTrigger>
 						<DialogContent>

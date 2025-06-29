@@ -26,32 +26,34 @@ export default function InvitationPage() {
 	>("pending");
 
 	const handleAccept = async () => {
-		await organization
-			.acceptInvitation({
+		try {
+			const res = await organization.acceptInvitation({
 				invitationId: params.id,
-			})
-			.then((res) => {
-				if (res.error) {
-					setError(res.error.message || "An error occurred");
-				} else {
-					setInvitationStatus("accepted");
-					router.push(`/dashboard`);
-				}
 			});
+			if (res.error) {
+				setError(res.error.message || "An error occurred");
+			} else {
+				setInvitationStatus("accepted");
+				router.push(`/dashboard`);
+			}
+		} catch (error) {
+			setError("An error occurred");
+		}
 	};
 
 	const handleReject = async () => {
-		await organization
-			.rejectInvitation({
+		try {
+			const res = await organization.rejectInvitation({
 				invitationId: params.id,
-			})
-			.then((res) => {
-				if (res.error) {
-					setError(res.error.message || "An error occurred");
-				} else {
-					setInvitationStatus("rejected");
-				}
 			});
+			if (res.error) {
+				setError(res.error.message || "An error occurred");
+			} else {
+				setInvitationStatus("rejected");
+			}
+		} catch (error) {
+			setError("An error occurred");
+		}
 	};
 
 	const [invitation, setInvitation] = useState<{
@@ -82,12 +84,17 @@ export default function InvitationPage() {
 				} else {
 					setInvitation(res.data);
 				}
+				
+				return;
+			})
+			.catch((error) => {
+				setError("An error occurred");
 			});
 	}, []);
 
 	return (
-		<div className="min-h-[80vh] flex items-center justify-center">
-			<div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+		<div className="min-h-screen flex items-center justify-center">
+			<div className="absolute pointer-events-none inset-0 flex items-center justify-center"></div>
 			{invitation ? (
 				<Card className="w-full max-w-md">
 					<CardHeader>
@@ -111,8 +118,8 @@ export default function InvitationPage() {
 						)}
 						{invitationStatus === "accepted" && (
 							<div className="space-y-4">
-								<div className="flex items-center justify-center w-16 h-16 mx-auto bg-green-100 rounded-full">
-									<CheckIcon className="w-8 h-8 text-green-600" />
+								<div className="flex items-center justify-center w-16 h-16 mx-auto bg-success-bg rounded-full">
+									<CheckIcon className="w-8 h-8 text-success-text" />
 								</div>
 								<h2 className="text-2xl font-bold text-center">
 									Welcome to {invitation?.organizationName}!
@@ -125,8 +132,8 @@ export default function InvitationPage() {
 						)}
 						{invitationStatus === "rejected" && (
 							<div className="space-y-4">
-								<div className="flex items-center justify-center w-16 h-16 mx-auto bg-red-100 rounded-full">
-									<XIcon className="w-8 h-8 text-red-600" />
+								<div className="flex items-center justify-center w-16 h-16 mx-auto bg-alert-bg rounded-full">
+									<XIcon className="w-8 h-8 text-alert-text" />
 								</div>
 								<h2 className="text-2xl font-bold text-center">
 									Invitation Declined

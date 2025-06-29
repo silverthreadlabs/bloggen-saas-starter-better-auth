@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 type Tab = {
 	title: string;
 	value: string;
-	content?: string | React.ReactNode | any;
+	content?: string | React.ReactNode | unknown;
 };
 
 export const Tabs = ({
@@ -115,6 +115,7 @@ export const FadeInDiv = ({
 	const isActive = (tab: Tab) => {
 		return tab.value === tabs[0].value;
 	};
+	
 	return (
 		<div className="relative w-full h-full">
 			{tabs.map((tab, idx) => (
@@ -138,7 +139,7 @@ export const FadeInDiv = ({
 						className,
 					)}
 				>
-					{tab.content}
+					{tab.content as React.ReactNode}
 				</motion.div>
 			))}
 		</div>

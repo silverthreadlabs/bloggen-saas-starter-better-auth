@@ -213,7 +213,7 @@ export function OrganizationCard(props: {
 									.map((invitation) => (
 										<motion.div
 											key={invitation.id}
-											className="flex items-center justify-between"
+											className="flex flex-col sm:flex-row gap-2 items-start sm:items-center justify-between"
 											variants={inviteVariants}
 											initial="hidden"
 											animate="visible"
@@ -231,6 +231,7 @@ export function OrganizationCard(props: {
 													disabled={isRevoking.includes(invitation.id)}
 													size="sm"
 													variant="destructive"
+													isLoading={isRevoking.includes(invitation.id)}
 													onClick={() => {
 														organization.cancelInvitation(
 															{
@@ -269,11 +270,7 @@ export function OrganizationCard(props: {
 														);
 													}}
 												>
-													{isRevoking.includes(invitation.id) ? (
-														<Loader2 className="animate-spin" size={16} />
-													) : (
-														"Revoke"
-													)}
+													Revoke
 												</Button>
 												<div>
 													<CopyButton
@@ -454,6 +451,7 @@ function InviteMemberDialog({
 	const [email, setEmail] = useState("");
 	const [role, setRole] = useState("member");
 	const [loading, setLoading] = useState(false);
+
 	return (
 		<Dialog>
 			<DialogTrigger asChild>

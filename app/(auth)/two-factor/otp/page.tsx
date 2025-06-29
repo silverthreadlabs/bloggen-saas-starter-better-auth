@@ -48,9 +48,10 @@ export default function Component() {
 			setMessage("Invalid OTP");
 		}
 	};
+
 	return (
 		<main className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)]">
-			<Card className="max-w-sm w-full">
+			<Card className="max-w-80 w-full">
 				<CardHeader>
 					<CardTitle>Two-Factor Authentication</CardTitle>
 					<CardDescription>
