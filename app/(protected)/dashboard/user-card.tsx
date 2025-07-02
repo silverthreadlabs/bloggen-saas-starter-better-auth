@@ -221,13 +221,11 @@ export default function UserCard(props: {
                 </div>
                 <div className='flex flex-wrap items-center justify-between gap-2 border-y py-4'>
                     <div className='flex flex-col gap-2'>
-                        <p className='text-sm'>Passkeys</p>
+                        {/* <p className='text-sm'>Passkeys</p>
                         <div className='flex flex-wrap gap-2'>
                             <AddPasskey />
                             <ListPasskeys />
-                        </div>
-                    </div>
-                    <div className='flex flex-col gap-2'>
+                        </div> */}
                         <p className='text-sm'>Two Factor</p>
                         <div className='flex gap-2'>
                             {!!session?.user.twoFactorEnabled && (
@@ -412,6 +410,192 @@ export default function UserCard(props: {
                                 </DialogContent>
                             </Dialog>
                         </div>
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                        {/* <p className='text-sm'>Two Factor</p>
+                        <div className='flex gap-2'>
+                            {!!session?.user.twoFactorEnabled && (
+                                <Dialog>
+                                    <DialogTrigger asChild>
+                                        <Button variant='outline' className='gap-2'>
+                                            <QrCode size={16} />
+                                            <span className='text-xs md:text-sm'>Scan QR Code</span>
+                                        </Button>
+                                    </DialogTrigger>
+                                    <DialogContent className='w-11/12 sm:max-w-[425px]'>
+                                        <DialogHeader>
+                                            <DialogTitle>Scan QR Code</DialogTitle>
+                                            <DialogDescription>Scan the QR code with your TOTP app</DialogDescription>
+                                        </DialogHeader>
+
+                                        {twoFactorVerifyURI ? (
+                                            <>
+                                                <div className='flex items-center justify-center'>
+                                                    <QRCode value={twoFactorVerifyURI} />
+                                                </div>
+                                                <div className='flex items-center justify-center gap-2'>
+                                                    <p className='text-canvas-text text-sm'>Copy URI to clipboard</p>
+                                                    <CopyButton textToCopy={twoFactorVerifyURI} />
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <div className='flex flex-col gap-2'>
+                                                <PasswordInput
+                                                    value={twoFaPassword}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                                        setTwoFaPassword(e.target.value)
+                                                    }
+                                                    placeholder='Enter Password'
+                                                />
+                                                <Button
+                                                    onClick={async () => {
+                                                        if (twoFaPassword.length < 8) {
+                                                            toast.error('Password must be at least 8 characters');
+
+                                                            return;
+                                                        }
+                                                        await client.twoFactor.getTotpUri(
+                                                            {
+                                                                password: twoFaPassword
+                                                            },
+                                                            {
+                                                                onSuccess(context) {
+                                                                    setTwoFactorVerifyURI(context.data.totpURI);
+                                                                }
+                                                            }
+                                                        );
+                                                        setTwoFaPassword('');
+                                                    }}>
+                                                    Show QR Code
+                                                </Button>
+                                            </div>
+                                        )}
+                                    </DialogContent>
+                                </Dialog>
+                            )}
+                            <Dialog open={twoFactorDialog} onOpenChange={setTwoFactorDialog}>
+                                <DialogTrigger asChild>
+                                    <Button
+                                        variant={session?.user.twoFactorEnabled ? 'destructive' : 'outline'}
+                                        size='default'
+                                        leadingIcon={
+                                            session?.user.twoFactorEnabled ? (
+                                                <ShieldOff size={16} />
+                                            ) : (
+                                                <ShieldCheck size={16} />
+                                            )
+                                        }>
+                                        {`${session?.user.twoFactorEnabled ? 'Disable' : 'Enable'} 2FA`}
+                                    </Button>
+                                </DialogTrigger>
+                                <DialogContent className='w-11/12 sm:max-w-[425px]'>
+                                    <DialogHeader>
+                                        <DialogTitle>
+                                            {session?.user.twoFactorEnabled ? 'Disable 2FA' : 'Enable 2FA'}
+                                        </DialogTitle>
+                                        <DialogDescription>
+                                            {session?.user.twoFactorEnabled
+                                                ? 'Disable the second factor authentication from your account'
+                                                : 'Enable 2FA to secure your account'}
+                                        </DialogDescription>
+                                    </DialogHeader>
+
+                                    {twoFactorVerifyURI ? (
+                                        <div className='flex flex-col gap-2'>
+                                            <div className='flex items-center justify-center'>
+                                                <QRCode value={twoFactorVerifyURI} />
+                                            </div>
+                                            <Label htmlFor='password'>Scan the QR code with your TOTP app</Label>
+                                            <Input
+                                                value={twoFaPassword}
+                                                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                                    setTwoFaPassword(e.target.value)
+                                                }
+                                                placeholder='Enter OTP'
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div className='flex flex-col gap-2'>
+                                            <Label htmlFor='password'>Password</Label>
+                                            <PasswordInput
+                                                id='password'
+                                                placeholder='Password'
+                                                value={twoFaPassword}
+                                                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                                    setTwoFaPassword(e.target.value)
+                                                }
+                                            />
+                                        </div>
+                                    )}
+                                    <DialogFooter>
+                                        <Button
+                                            disabled={isPendingTwoFa}
+                                            isLoading={isPendingTwoFa}
+                                            onClick={async () => {
+                                                if (twoFaPassword.length < 8 && !twoFactorVerifyURI) {
+                                                    toast.error('Password must be at least 8 characters');
+
+                                                    return;
+                                                }
+                                                setIsPendingTwoFa(true);
+                                                if (session?.user.twoFactorEnabled) {
+                                                    const res = await client.twoFactor.disable({
+                                                        password: twoFaPassword,
+                                                        fetchOptions: {
+                                                            onError(context) {
+                                                                toast.error(context.error.message);
+                                                            },
+                                                            onSuccess() {
+                                                                toast('2FA disabled successfully');
+                                                                setTwoFactorDialog(false);
+                                                            }
+                                                        }
+                                                    });
+                                                } else {
+                                                    if (twoFactorVerifyURI) {
+                                                        await client.twoFactor.verifyTotp({
+                                                            code: twoFaPassword,
+                                                            fetchOptions: {
+                                                                onError(context) {
+                                                                    setIsPendingTwoFa(false);
+                                                                    setTwoFaPassword('');
+                                                                    toast.error(context.error.message);
+                                                                },
+                                                                onSuccess() {
+                                                                    toast('2FA enabled successfully');
+                                                                    setTwoFactorVerifyURI('');
+                                                                    setIsPendingTwoFa(false);
+                                                                    setTwoFaPassword('');
+                                                                    setTwoFactorDialog(false);
+                                                                }
+                                                            }
+                                                        });
+
+                                                        return;
+                                                    }
+                                                    const res = await client.twoFactor.enable({
+                                                        password: twoFaPassword,
+                                                        fetchOptions: {
+                                                            onError(context) {
+                                                                toast.error(context.error.message);
+                                                            },
+                                                            onSuccess(ctx) {
+                                                                setTwoFactorVerifyURI(ctx.data.totpURI);
+                                                                // toast.success("2FA enabled successfully");
+                                                                // setTwoFactorDialog(false);
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                                setIsPendingTwoFa(false);
+                                                setTwoFaPassword('');
+                                            }}>
+                                            session?.user.twoFactorEnabled ? "Disable 2FA" : "Enable 2FA"
+                                        </Button>
+                                    </DialogFooter>
+                                </DialogContent>
+                            </Dialog>
+                        </div> */}
                     </div>
                 </div>
             </CardContent>
@@ -740,113 +924,113 @@ function AddPasskey() {
     );
 }
 
-function ListPasskeys() {
-    const { data } = client.useListPasskeys();
-    const [isOpen, setIsOpen] = useState(false);
-    const [passkeyName, setPasskeyName] = useState('');
+// function ListPasskeys() {
+//     const { data } = client.useListPasskeys();
+//     const [isOpen, setIsOpen] = useState(false);
+//     const [passkeyName, setPasskeyName] = useState('');
 
-    const handleAddPasskey = async () => {
-        if (!passkeyName) {
-            toast.error('Passkey name is required');
+//     const handleAddPasskey = async () => {
+//         if (!passkeyName) {
+//             toast.error('Passkey name is required');
 
-            return;
-        }
-        setIsLoading(true);
-        const res = await client.passkey.addPasskey({
-            name: passkeyName
-        });
-        setIsLoading(false);
-        if (res?.error) {
-            toast.error(res?.error.message);
-        } else {
-            toast.success('Passkey added successfully. You can now use it to login.');
-        }
-    };
-    const [isLoading, setIsLoading] = useState(false);
-    const [isDeletePasskey, setIsDeletePasskey] = useState<boolean>(false);
+//             return;
+//         }
+//         setIsLoading(true);
+//         const res = await client.passkey.addPasskey({
+//             name: passkeyName
+//         });
+//         setIsLoading(false);
+//         if (res?.error) {
+//             toast.error(res?.error.message);
+//         } else {
+//             toast.success('Passkey added successfully. You can now use it to login.');
+//         }
+//     };
+//     const [isLoading, setIsLoading] = useState(false);
+//     const [isDeletePasskey, setIsDeletePasskey] = useState<boolean>(false);
     
-    return (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogTrigger asChild>
-                <Button variant='outline' leadingIcon={<Fingerprint size={15} />}>
-                    Passkeys {data?.length ? `[${data?.length}]` : ''}
-                </Button>
-            </DialogTrigger>
-            <DialogContent className='w-11/12 sm:max-w-[425px]'>
-                <DialogHeader>
-                    <DialogTitle>Passkeys</DialogTitle>
-                    <DialogDescription>List of passkeys</DialogDescription>
-                </DialogHeader>
-                {data?.length ? (
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Name</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {data.map((passkey) => (
-                                <TableRow key={passkey.id} className='flex items-center justify-between'>
-                                    <TableCell>{passkey.name || 'My Passkey'}</TableCell>
-                                    <TableCell className='text-right'>
-                                        <button
-                                            onClick={async () => {
-                                                const res = await client.passkey.deletePasskey({
-                                                    id: passkey.id,
-                                                    fetchOptions: {
-                                                        onRequest: () => {
-                                                            setIsDeletePasskey(true);
-                                                        },
-                                                        onSuccess: () => {
-                                                            toast('Passkey deleted successfully');
-                                                            setIsDeletePasskey(false);
-                                                        },
-                                                        onError: (error) => {
-                                                            toast.error(error.error.message);
-                                                            setIsDeletePasskey(false);
-                                                        }
-                                                    }
-                                                });
-                                            }}>
-                                            {isDeletePasskey ? (
-                                                <Loader2 size={15} className='animate-spin' />
-                                            ) : (
-                                                <Trash size={15} className='text-alert-text cursor-pointer' />
-                                            )}
-                                        </button>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                ) : (
-                    <p className='text-canvas-text text-sm'>No passkeys found</p>
-                )}
-                {!data?.length && (
-                    <div className='flex flex-col gap-2'>
-                        <div className='flex flex-col gap-2'>
-                            <Label htmlFor='passkey-name' className='text-sm'>
-                                New Passkey
-                            </Label>
-                            <Input
-                                id='passkey-name'
-                                value={passkeyName}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasskeyName(e.target.value)}
-                                placeholder='My Passkey'
-                            />
-                        </div>
-                        <Button type='submit' onClick={handleAddPasskey} fullWidth isLoading={isLoading}>
-                            <Fingerprint className='mr-2 h-4 w-4' />
-                            Create Passkey
-                        </Button>
-                    </div>
-                )}
-                <DialogFooter>
-                    <Button variant='outline' onClick={() => setIsOpen(false)}>
-                        Close
-                    </Button>
-                </DialogFooter>
-            </DialogContent>
-        </Dialog>
-    );
-}
+//     return (
+//         <Dialog open={isOpen} onOpenChange={setIsOpen}>
+//             <DialogTrigger asChild>
+//                 <Button variant='outline' leadingIcon={<Fingerprint size={15} />}>
+//                     Passkeys {data?.length ? `[${data?.length}]` : ''}
+//                 </Button>
+//             </DialogTrigger>
+//             <DialogContent className='w-11/12 sm:max-w-[425px]'>
+//                 <DialogHeader>
+//                     <DialogTitle>Passkeys</DialogTitle>
+//                     <DialogDescription>List of passkeys</DialogDescription>
+//                 </DialogHeader>
+//                 {data?.length ? (
+//                     <Table>
+//                         <TableHeader>
+//                             <TableRow>
+//                                 <TableHead>Name</TableHead>
+//                             </TableRow>
+//                         </TableHeader>
+//                         <TableBody>
+//                             {data.map((passkey) => (
+//                                 <TableRow key={passkey.id} className='flex items-center justify-between'>
+//                                     <TableCell>{passkey.name || 'My Passkey'}</TableCell>
+//                                     <TableCell className='text-right'>
+//                                         <button
+//                                             onClick={async () => {
+//                                                 const res = await client.passkey.deletePasskey({
+//                                                     id: passkey.id,
+//                                                     fetchOptions: {
+//                                                         onRequest: () => {
+//                                                             setIsDeletePasskey(true);
+//                                                         },
+//                                                         onSuccess: () => {
+//                                                             toast('Passkey deleted successfully');
+//                                                             setIsDeletePasskey(false);
+//                                                         },
+//                                                         onError: (error) => {
+//                                                             toast.error(error.error.message);
+//                                                             setIsDeletePasskey(false);
+//                                                         }
+//                                                     }
+//                                                 });
+//                                             }}>
+//                                             {isDeletePasskey ? (
+//                                                 <Loader2 size={15} className='animate-spin' />
+//                                             ) : (
+//                                                 <Trash size={15} className='text-alert-text cursor-pointer' />
+//                                             )}
+//                                         </button>
+//                                     </TableCell>
+//                                 </TableRow>
+//                             ))}
+//                         </TableBody>
+//                     </Table>
+//                 ) : (
+//                     <p className='text-canvas-text text-sm'>No passkeys found</p>
+//                 )}
+//                 {!data?.length && (
+//                     <div className='flex flex-col gap-2'>
+//                         <div className='flex flex-col gap-2'>
+//                             <Label htmlFor='passkey-name' className='text-sm'>
+//                                 New Passkey
+//                             </Label>
+//                             <Input
+//                                 id='passkey-name'
+//                                 value={passkeyName}
+//                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasskeyName(e.target.value)}
+//                                 placeholder='My Passkey'
+//                             />
+//                         </div>
+//                         <Button type='submit' onClick={handleAddPasskey} fullWidth isLoading={isLoading}>
+//                             <Fingerprint className='mr-2 h-4 w-4' />
+//                             Create Passkey
+//                         </Button>
+//                     </div>
+//                 )}
+//                 <DialogFooter>
+//                     <Button variant='outline' onClick={() => setIsOpen(false)}>
+//                         Close
+//                     </Button>
+//                 </DialogFooter>
+//             </DialogContent>
+//         </Dialog>
+//     );
+// }

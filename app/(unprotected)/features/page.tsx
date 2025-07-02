@@ -11,7 +11,7 @@ export const metadata: Metadata = createPageMetadata({
         'Launch a fully optimized Next.js site with Bloggen SEO Starter, then create high-quality, SEO-friendly content effortlessly using Bloggen AI.'
 });
 
-export default function AboutPage() {
+export default function FeaturesPage() {
     return (
         <main role='main' className='min-h-screen'>
             <AboutSchema />
