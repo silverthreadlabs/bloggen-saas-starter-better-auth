@@ -59,7 +59,7 @@ interface SubscriptionData {
 export default function UserCard(props: {
     session: Session | null;
     activeSessions: Session['session'][];
-    subscription?: unknown;
+    subscription?: SubscriptionData;
 }) {
     const router = useRouter();
     const { data, isPending } = useSession();
@@ -83,6 +83,7 @@ export default function UserCard(props: {
                     throw: true
                 }
             });
+
 
             return res.length ? res[0] : null;
         }
@@ -129,6 +130,7 @@ export default function UserCard(props: {
                     </div>
                     <div className='flex items-center justify-between'>
                         <div>
+                            <SubscriptionTierLabel tier={(subscription as SubscriptionData)?.plan?.toLowerCase() as 'starter'} />
                             <SubscriptionTierLabel tier={(subscription as SubscriptionData)?.plan?.toLowerCase() as 'starter'} />
                         </div>
                         <Component
@@ -452,6 +454,7 @@ export default function UserCard(props: {
                                                         if (twoFaPassword.length < 8) {
                                                             toast.error('Password must be at least 8 characters');
 
+
                                                             return;
                                                         }
                                                         await client.twoFactor.getTotpUri(
@@ -478,6 +481,7 @@ export default function UserCard(props: {
                                     <Button
                                         variant={session?.user.twoFactorEnabled ? 'destructive' : 'outline'}
                                         size='default'
+                                        size='default'
                                         leadingIcon={
                                             session?.user.twoFactorEnabled ? (
                                                 <ShieldOff size={16} />
@@ -485,6 +489,7 @@ export default function UserCard(props: {
                                                 <ShieldCheck size={16} />
                                             )
                                         }>
+                                        {`${session?.user.twoFactorEnabled ? 'Disable' : 'Enable'} 2FA`}
                                         {`${session?.user.twoFactorEnabled ? 'Disable' : 'Enable'} 2FA`}
                                     </Button>
                                 </DialogTrigger>
@@ -535,6 +540,7 @@ export default function UserCard(props: {
                                                 if (twoFaPassword.length < 8 && !twoFactorVerifyURI) {
                                                     toast.error('Password must be at least 8 characters');
 
+
                                                     return;
                                                 }
                                                 setIsPendingTwoFa(true);
@@ -570,6 +576,7 @@ export default function UserCard(props: {
                                                                 }
                                                             }
                                                         });
+
 
                                                         return;
                                                     }
@@ -662,6 +669,7 @@ function ChangePassword() {
     const [open, setOpen] = useState<boolean>(false);
     const [signOutDevices, setSignOutDevices] = useState<boolean>(false);
 
+
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
@@ -723,10 +731,12 @@ function ChangePassword() {
                             if (newPassword !== confirmPassword) {
                                 toast.error('Passwords do not match');
 
+
                                 return;
                             }
                             if (newPassword.length < 8) {
                                 toast.error('Password must be at least 8 characters');
+
 
                                 return;
                             }
@@ -776,6 +786,7 @@ function EditUserDialog() {
     };
     const [open, setOpen] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -871,6 +882,7 @@ function AddPasskey() {
         if (!passkeyName) {
             toast.error('Passkey name is required');
 
+
             return;
         }
         setIsLoading(true);
@@ -885,6 +897,7 @@ function AddPasskey() {
         }
         setIsLoading(false);
     };
+
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
