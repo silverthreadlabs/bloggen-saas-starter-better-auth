@@ -71,6 +71,10 @@ export function Rate({
       };
 
       void onRateAction(url, feedback).then((response) => {
+        return setPrevious({
+          response,
+          ...feedback,
+        });
         setPrevious({
           response,
           ...feedback,

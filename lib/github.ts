@@ -35,6 +35,7 @@ async function getOctokit(): Promise<Octokit> {
   );
 
   instance = await app.getInstallationOctokit(data.id);
+  
   return instance;
 }
 
