@@ -1,17 +1,76 @@
 ---
-title: Components
-description: Components
+title: "Fumadocs"
+description: Getting Started with Fumadocs
+lastModified: "2025-07-02"
 ---
+# Fumadocs Framework: Quick Start
+URL: /docs/ui
+Source: https://raw.githubusercontent.com/fuma-nama/fumadocs/refs/heads/main/apps/docs/content/docs/ui/index.mdx
 
-## Code Block
+Getting Started with Fumadocs
+        
+## Introduction
 
-```js
-console.log('Hello World');
+Fumadocs <span className="text-fd-muted-foreground text-sm">(Foo-ma docs)</span> is a **documentation framework** based on Next.js, designed to be fast, flexible,
+and composes seamlessly into Next.js App Router.
+
+Fumadocs has different parts:
+
+
+
+### Terminology
+
+**Markdown/MDX:** Markdown is a markup language for creating formatted text. Fumadocs supports Markdown and MDX (superset of Markdown) out-of-the-box.
+
+Although not required, some basic knowledge of Next.js App Router would be useful for further customisations.
+
+## Automatic Installation
+
+A minimum version of Node.js 18 required, note that Node.js 23.1 might have problems with Next.js production build.
+
+```bash tab="npm"
+npm create fumadocs-app
 ```
 
-## Cards
+```bash tab="pnpm"
+pnpm create fumadocs-app
+```
 
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.vercel.app" />
-</Cards>
+```bash tab="yarn"
+yarn create fumadocs-app
+```
+
+```bash tab="bun"
+bun create fumadocs-app
+```
+
+It will ask you:
+
+* the React.js framework to use (the docs is only written for Next.js).
+* the content source to use.
+
+A new fumadocs app should be initialized. Now you can start hacking!
+
+
+### Enjoy!
+
+Create your first MDX file in the docs folder.
+
+```mdx title="content/docs/index.mdx"
+---
+title: Hello World
+---
+
+## Yo what's up
+```
+
+Run the app in development mode and see [http://localhost:3000/docs](http://localhost:3000/docs).
+
+```npm
+npm run dev
+```
+
+## FAQ
+
+Some common questions you may encounter.
+

@@ -346,67 +346,62 @@
     @import 'fumadocs-ui/style.css';
 }
 
-/* Styles removed and will be injected via browser */
-#nd-page > div:first-child {
-    @apply !top-[65px];
+#nd-sidebar {
+    @apply bg-canvas-bg;
 }
 
-#nd-tocnav {
-    @apply bg-canvas-base/80 backdrop-blur-sm backdrop-saturate-300;
+.blogs-docs-layout {
+    /* Hide the unwanted main tag from DocsLayout */
+    main#nd-docs-layout {
+        display: none !important;
+    }
+
+    /* Alternative: Remove the main tag styling but keep content */
+    main#nd-docs-layout > * {
+        display: block !important;
+    }
+
+    main#nd-docs-layout {
+        all: unset !important;
+        display: contents !important;
+    }
+
+    #nd-toc {
+        padding-top: 80px;
+    }
+
+    /*Add max width to code blocks to solve the responsiveness on small screens*/
+
+    #nd-page article figure div pre {
+        position: flex;
+        margin: auto;
+        max-width: 200px;
+    }
+
+    /* Fix figure width issues on blog pages */
+    #nd-page article figure {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    #nd-page article figure img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    /* Styles removed and will be injected via browser */
+    #nd-page > div:first-child {
+        @apply !top-[65px];
+    }
+
+    #nd-tocnav {
+        @apply bg-canvas-base/80 backdrop-blur-sm backdrop-saturate-300;
+    }
 }
 
-/* Hide the unwanted main tag from DocsLayout */
-main#nd-docs-layout {
-    display: none !important;
-}
-
-/* Alternative: Remove the main tag styling but keep content */
-main#nd-docs-layout > * {
-    display: block !important;
-}
-
-main#nd-docs-layout {
-    all: unset !important;
-    display: contents !important;
-}
 /*Add top padding to TOC to avoid conflict with custom nav*/
-
-#nd-toc {
-    padding-top: 80px;
-}
-
-/*Add max width to code blocks to solve the responsiveness on small screens*/
-
-#nd-page article figure div pre {
-    position: flex;
-    margin: auto;
-    max-width: 200px;
-}
-
-/*Remove padding and max-width from product slug page so the content is flush with the top nav*/
-.product-page {
-    #nd-page {
-        padding: 0;
-    }
-
-    #nd-page article {
-        max-width: none;
-        padding: 0;
-    }
-}
-
-/* Fix figure width issues on blog pages */
-#nd-page article figure {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-}
-
-#nd-page article figure img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-}
 
 html {
     color-scheme: dark;

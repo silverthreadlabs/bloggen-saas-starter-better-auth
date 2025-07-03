@@ -8,7 +8,7 @@ import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 
 export default function Layout({ children }: { children: ReactNode }) {
     return (
-        <div className='mx-auto max-w-7xl flex-auto'>
+        <div className='mx-auto max-w-7xl flex-auto blogs-docs-layout'>
             <DocsLayout
                 tree={blogSource.pageTree}
                 sidebar={{ enabled: false }}
