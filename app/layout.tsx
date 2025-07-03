@@ -49,8 +49,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     storageKey='bloggen-seo-starter-theme'
                     disableTransitionOnChange>
                     <main className='from-canvas-bg to-canvas-bg-base flex flex-auto flex-col items-center bg-gradient-to-b md:px-0'>
-                        <Banner />
-                        <Header />
+                        {/* <Banner /> */}
+                        {/* <Header /> */}
                         <RootProvider>
                             {/* <Wrapper> */}
                                 <WrapperWithQuery>
@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                                 </WrapperWithQuery>
                             {/* </Wrapper> */}
                         </RootProvider>
-                        <Footer />
+                        {/* <Footer /> */}
                         <Toaster richColors closeButton />
                     </main>
                 </ThemeProvider>

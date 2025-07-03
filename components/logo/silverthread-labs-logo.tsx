@@ -1,6 +1,6 @@
 
 
-// Create a reusable SilverThreadLabs logo component
+// Create a reusable Silverthreadlabs logo component
 const SilverthreadLabsLogo = ({ className }: { className?: string }) => (
     <svg
         width='16'

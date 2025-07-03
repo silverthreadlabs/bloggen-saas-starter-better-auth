@@ -10,8 +10,8 @@ import { Button } from '@/components/ui/button';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
 const NAV_ITEMS = [
-    { href: '/about', label: 'About' },
-    { href: '/products', label: 'Products' },
+    { href: '/features', label: 'Features' },
+    { href: '/docs', label: 'Docs' },
     { href: '/blog', label: 'Blog' }
 ];
 
