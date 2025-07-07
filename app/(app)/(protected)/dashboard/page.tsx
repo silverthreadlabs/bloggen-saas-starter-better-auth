@@ -30,18 +30,32 @@ export default async function DashboardPage() {
     });
 
     return (
-        <div className='mx-auto min-h-screen w-full max-w-7xl space-y-8 py-10 px-4 sm:px-0 sm:py-16'>
-            <div className='flex flex-col gap-4'>
-                <AccountSwitcher sessions={JSON.parse(JSON.stringify(deviceSessions))} />
-                <UserCard
-                    session={JSON.parse(JSON.stringify(session))}
-                    activeSessions={JSON.parse(JSON.stringify(activeSessions))}
-                    subscription={subscriptions.find((sub) => sub.status === 'active' || sub.status === 'trialing')}
-                />
-                <OrganizationCard
-                    session={JSON.parse(JSON.stringify(session))}
-                    activeOrganization={JSON.parse(JSON.stringify(organization))}
-                />
+        <div className="min-h-screen">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                {/* Header Section */}
+                <div className="py-8 sm:py-12">
+                    <div className="mb-8">
+                        <h1 className="text-3xl font-bold tracking-tight text-canvas-text-contrast sm:text-4xl">
+                            Dashboard
+                        </h1>
+                        <p className="mt-2 text-lg text-canvas-text">
+                            Manage your account, organization, and subscription settings.
+                        </p>
+                    </div>
+                    
+                    {/* Dashboard Grid */}
+                    <div className="grid gap-6 lg:grid-cols-2">
+                        <UserCard
+                            session={JSON.parse(JSON.stringify(session))}
+                            activeSessions={JSON.parse(JSON.stringify(activeSessions))}
+                            subscription={subscriptions.find((sub) => sub.status === 'active' || sub.status === 'trialing')}
+                        />
+                        <OrganizationCard
+                            session={JSON.parse(JSON.stringify(session))}
+                            activeOrganization={JSON.parse(JSON.stringify(organization))}
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     );

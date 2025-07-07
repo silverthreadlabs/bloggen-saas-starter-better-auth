@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { client } from "@/lib/auth/auth-client";
 import { cn } from "@/lib/utils";
-import { ArrowUpFromLine, CreditCard, RefreshCcw } from "lucide-react";
+import { ArrowUpFromLine, CreditCard, RefreshCcw, Crown, Zap, Building } from "lucide-react";
 import { useId, useState } from "react";
 import { toast } from "sonner";
 
@@ -22,16 +22,44 @@ function Component(props: {
 	const [selectedPlan, setSelectedPlan] = useState("starter");
 	const id = useId();
 	
+	const plans = [
+		{
+			id: "starter",
+			name: "Starter",
+			price: "$50/month",
+			icon: Zap,
+			description: "Perfect for individuals and small teams",
+			features: ["Up to 5 team members", "Basic analytics", "Email support"]
+		},
+		{
+			id: "professional",
+			name: "Professional",
+			price: "$99/month",
+			icon: Crown,
+			description: "Ideal for growing businesses",
+			features: ["Up to 25 team members", "Advanced analytics", "Priority support", "Custom integrations"]
+		},
+		{
+			id: "enterprise",
+			name: "Enterprise",
+			price: "Contact sales",
+			icon: Building,
+			description: "For large organizations",
+			features: ["Unlimited team members", "Custom solutions", "Dedicated support", "SLA guarantee"]
+		}
+	];
+	
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
 				<Button
 					variant={!props.currentPlan ? "solid" : "outline"}
-					size="sm"
+					size='sm'
 					className={cn(
 						"gap-2",
-						!props.currentPlan &&
-							"bg-gradient-to-br from-primary-solid to-canvas-line",
+						!props.currentPlan
+							? "bg-gradient-to-r from-primary-solid to-primary-solid-hover duration-300 text-primary-on-primary hover:from-primary-solid-hover hover:to-primary-solid"
+							: "border-primary-border text-primary-text hover:bg-primary-bg duration-300"
 					)}
 				>
 					{props.currentPlan ? (
@@ -42,105 +70,110 @@ function Component(props: {
 					{props.currentPlan ? "Change Plan" : "Upgrade Plan"}
 				</Button>
 			</DialogTrigger>
-			<DialogContent>
-				<div className="mb-2 flex flex-col gap-2">
+			<DialogContent className="max-w-2xl">
+				<div className="mb-6 flex flex-col gap-3">
 					<div
-						className="flex size-11 shrink-0 items-center justify-center rounded-full border border-border"
+						className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary-bg border border-primary-border"
 						aria-hidden="true"
 					>
 						{props.currentPlan ? (
-							<RefreshCcw className="opacity-80" size={16} strokeWidth={2} />
+							<RefreshCcw className="text-primary-solid" size={20} strokeWidth={2} />
 						) : (
-							<CreditCard className="opacity-80" size={16} strokeWidth={2} />
+							<CreditCard className="text-primary-solid" size={20} strokeWidth={2} />
 						)}
 					</div>
 					<DialogHeader>
-						<DialogTitle className="text-left">
+						<DialogTitle className="text-left text-xl">
 							{!props.currentPlan ? "Upgrade" : "Change"} your plan
 						</DialogTitle>
-						<DialogDescription className="text-left">
-							Pick one of the following plans.
+						<DialogDescription className="text-left text-canvas-text">
+							Choose the perfect plan for your needs. All plans include a 14-day free trial.
 						</DialogDescription>
 					</DialogHeader>
 				</div>
 
-				<form className="space-y-5">
+				<form className="space-y-6">
 					<RadioGroup
-						className="gap-2"
-						defaultValue="2"
+						className="grid gap-4"
+						defaultValue="starter"
 						value={selectedPlan}
 						onValueChange={(value) => setSelectedPlan(value)}
 					>
-						<div className="relative flex w-full items-center gap-2 rounded-lg border border-input px-4 py-3 shadow-sm shadow-black/5 has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent">
-							<RadioGroupItem
-								value="starter"
-								id={`${id}-1`}
-								aria-describedby={`${id}-1-description`}
-								className="order-1 after:absolute after:inset-0"
-							/>
-							<div className="grid grow gap-1">
-								<Label htmlFor={`${id}-1`}>Starter</Label>
-								<p
-									id={`${id}-1-description`}
-									className="text-xs text-canvas-text"
+						{plans.map((plan) => {
+							const Icon = plan.icon;
+							const isSelected = selectedPlan === plan.id;
+							const isCurrentPlan = props.currentPlan?.toLowerCase() === plan.id;
+							
+							return (
+								<div
+									key={plan.id}
+									className={cn(
+										"relative flex w-full items-start gap-4 rounded-xl border p-4 transition-all",
+										isSelected
+											? "border-primary-border bg-primary-bg shadow-sm"
+											: "border-canvas-border bg-canvas-bg hover:border-canvas-border-hover hover:bg-canvas-bg-hover"
+									)}
 								>
-									$50/month
-								</p>
-							</div>
-						</div>
-						<div className="relative flex w-full items-center gap-2 rounded-lg border border-input px-4 py-3 shadow-sm shadow-black/5 has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent">
-							<RadioGroupItem
-								value="professional"
-								id={`${id}-2`}
-								aria-describedby={`${id}-2-description`}
-								className="order-1 after:absolute after:inset-0"
-							/>
-							<div className="grid grow gap-1">
-								<Label htmlFor={`${id}-2`}>Professional</Label>
-								<p
-									id={`${id}-2-description`}
-									className="text-xs text-canvas-text"
-								>
-									$99/month
-								</p>
-							</div>
-						</div>
-						<div className="relative flex w-full items-center gap-2 rounded-lg border border-input px-4 py-3 shadow-sm shadow-black/5 has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent">
-							<RadioGroupItem
-								value="enterprise"
-								id={`${id}-3`}
-								aria-describedby={`${id}-3-description`}
-								className="order-1 after:absolute after:inset-0"
-							/>
-							<div className="grid grow gap-1">
-								<Label htmlFor={`${id}-3`}>Enterprise</Label>
-								<p
-									id={`${id}-3-description`}
-									className="text-xs text-canvas-text"
-								>
-									Contact our sales team
-								</p>
-							</div>
-						</div>
+									<RadioGroupItem
+										value={plan.id}
+										id={`${id}-${plan.id}`}
+										className="mt-1"
+									/>
+									<div className="flex-1 space-y-2">
+										<div className="flex items-center gap-3">
+											<div className={cn(
+												"flex size-8 items-center justify-center rounded-lg",
+												isSelected ? "bg-primary-solid text-primary-on-primary" : "bg-canvas-bg-active text-canvas-text"
+											)}>
+												<Icon size={16} />
+											</div>
+											<div className="flex-1">
+												<Label htmlFor={`${id}-${plan.id}`} className="text-base font-semibold text-canvas-text-contrast">
+													{plan.name}
+													{isCurrentPlan && (
+														<span className="ml-2 text-xs bg-success-bg text-success-text px-2 py-1 rounded-full">
+															Current
+														</span>
+													)}
+												</Label>
+												<p className="text-sm text-canvas-text">{plan.description}</p>
+											</div>
+											<div className="text-right">
+												<p className="font-semibold text-canvas-text-contrast">{plan.price}</p>
+											</div>
+										</div>
+										<ul className="ml-11 space-y-1">
+											{plan.features.map((feature, index) => (
+												<li key={index} className="text-sm text-canvas-text flex items-center gap-2">
+													<div className="size-1 rounded-full bg-success-solid" />
+													{feature}
+												</li>
+											))}
+										</ul>
+									</div>
+								</div>
+							);
+						})}
 					</RadioGroup>
 
-					<div className="space-y-3">
-						<p className="text-xs text-canvas-text text-center">
-							note: all upgrades takes effect immediately and you'll be charged
-							the new amount on your next billing cycle.
+					<div className="rounded-lg border border-warning-border bg-warning-bg p-3">
+						<p className="text-xs text-warning-text text-center">
+							Note: All plan changes take effect immediately. You'll be charged the new amount on your next billing cycle.
 						</p>
 					</div>
 
-					<div className="grid gap-2">
+					<div className="grid gap-3">
 						<Button
 							type="button"
-							className="w-full"
+							className="w-full bg-primary-solid text-primary-on-primary hover:bg-primary-solid-hover"
 							disabled={
 								selectedPlan === props.currentPlan?.toLowerCase() &&
 								!props.isTrial
 							}
 							onClick={async () => {
 								if (selectedPlan === "enterprise") {
+									// Handle enterprise contact
+									toast.info("Please contact our sales team for enterprise pricing");
 									return;
 								}
 								await client.subscription.upgrade(
@@ -151,27 +184,30 @@ function Component(props: {
 										onError: (ctx) => {
 											toast.error(ctx.error.message);
 										},
+										onSuccess: () => {
+											toast.success("Plan updated successfully!");
+										}
 									},
 								);
 							}}
 						>
 							{selectedPlan === props.currentPlan?.toLowerCase()
 								? props.isTrial
-									? "Upgrade"
+									? "Upgrade Now"
 									: "Current Plan"
 								: selectedPlan === "starter"
 									? !props.currentPlan
-										? "Upgrade"
+										? "Start Free Trial"
 										: "Downgrade"
 									: selectedPlan === "professional"
-										? "Upgrade"
-										: "Contact us"}
+										? "Upgrade to Professional"
+										: "Contact Sales"}
 						</Button>
 						{props.currentPlan && (
 							<Button
 								type="button"
-								variant="destructive"
-								className="w-full"
+								variant="outline"
+								className="w-full border-alert-border text-alert-text hover:bg-alert-bg"
 								onClick={async () => {
 									await client.subscription.cancel(
 										{
@@ -181,11 +217,14 @@ function Component(props: {
 											onError: (ctx) => {
 												toast.error(ctx.error.message);
 											},
+											onSuccess: () => {
+												toast.success("Subscription cancelled successfully");
+											}
 										},
 									);
 								}}
 							>
-								Cancel Plan
+								Cancel Subscription
 							</Button>
 						)}
 					</div>

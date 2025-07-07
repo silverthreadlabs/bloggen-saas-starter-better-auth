@@ -232,6 +232,7 @@ export default function SignIn() {
                 onClick={() => handleSocialSignIn(provider.name)}
                 isLoading={loadingProvider === provider.name}
                 fullWidth
+                className="flex flex-row gap-2 items-center"
               >
                 {provider.icon}
                 {provider.label}
@@ -242,9 +243,9 @@ export default function SignIn() {
       </CardContent>
 
       <CardFooter>
-        <div className="flex justify-center w-full border-t py-4">
+        {/* <div className="flex justify-center w-full border-t py-4">
           <p className="text-center text-xs text-canvas-text">
-            Powered by{" "}
+            Created by{" "}
             <Link
               href="https://better-auth.com"
               className={cn(
@@ -257,7 +258,7 @@ export default function SignIn() {
               <span className="dark:text-orange-200/90">better-auth.</span>
             </Link>
           </p>
-        </div>
+        </div> */}
       </CardFooter>
     </Card>
   );

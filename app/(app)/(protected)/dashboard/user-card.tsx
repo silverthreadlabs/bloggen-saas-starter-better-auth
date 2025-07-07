@@ -36,15 +36,19 @@ import { Component } from './change-plan';
 import {
     Edit,
     Fingerprint,
+    Key,
     Laptop,
     Loader2,
     LogOut,
+    Monitor,
     Plus,
     QrCode,
+    Settings,
     ShieldCheck,
     ShieldOff,
     StopCircle,
     Trash,
+    User,
     X
 } from 'lucide-react';
 import QRCode from 'react-qr-code';
@@ -84,151 +88,194 @@ export default function UserCard(props: {
                 }
             });
 
-
             return res.length ? res[0] : null;
         }
     });
 
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle>User</CardTitle>
-            </CardHeader>
-            <CardContent className='grid grid-cols-1 gap-8'>
-                <div className='flex flex-col gap-2'>
-                    <div className='flex items-start justify-between'>
-                        <div className='flex items-center gap-4'>
-                            <Avatar className='hidden h-9 w-9 sm:flex'>
-                                <AvatarImage
-                                    src={session?.user.image || undefined}
-                                    alt='Avatar'
-                                    className='object-cover'
-                                />
-                                <AvatarFallback>{session?.user.name.charAt(0)}</AvatarFallback>
-                            </Avatar>
-                            <div className='grid'>
-                                <div className='flex items-center gap-1'>
-                                    <p className='text-sm leading-none font-medium'>{session?.user.name}</p>
-                                    {!!subscription && (
-                                        <Badge className='w-min rounded-full p-px' variant='outline'>
-                                            <svg
-                                                xmlns='http://www.w3.org/2000/svg'
-                                                width='1.2em'
-                                                height='1.2em'
-                                                viewBox='0 0 24 24'>
-                                                <path
-                                                    fill='currentColor'
-                                                    d='m9.023 21.23l-1.67-2.814l-3.176-.685l.312-3.277L2.346 12L4.49 9.546L4.177 6.27l3.177-.685L9.023 2.77L12 4.027l2.977-1.258l1.67 2.816l3.176.684l-.312 3.277L21.655 12l-2.142 2.454l.311 3.277l-3.177.684l-1.669 2.816L12 19.973zm1.927-6.372L15.908 9.9l-.708-.72l-4.25 4.25l-2.15-2.138l-.708.708z'></path>
-                                            </svg>
-                                        </Badge>
-                                    )}
-                                </div>
-                                <p className='text-sm'>{session?.user.email}</p>
-                            </div>
-                        </div>
-                        <EditUserDialog />
+        <Card className='bg-canvas-bg'>
+            <CardHeader className='rounded-t-lg bg-canvas-bg-subtle border-canvas-border border-b'>
+                <div className='flex items-center gap-3'>
+                    <div className='bg-primary-bg flex h-10 w-10 items-center justify-center rounded-lg'>
+                        <User className='text-primary-solid h-5 w-5' />
                     </div>
-                    <div className='flex items-center justify-between'>
-                        <div>
-                            <SubscriptionTierLabel tier={(subscription as SubscriptionData)?.plan?.toLowerCase() as 'starter'} />
-                            <SubscriptionTierLabel tier={(subscription as SubscriptionData)?.plan?.toLowerCase() as 'starter'} />
-                        </div>
-                        <Component
-                            currentPlan={(subscription as SubscriptionData)?.plan?.toLowerCase() as 'starter'}
-                            isTrial={(subscription as SubscriptionData)?.status === 'trialing'}
-                        />
+                    <div className='flex flex-col gap-1'>
+                        <CardTitle className='text-canvas-text-contrast'>Account Settings</CardTitle>
+                        <p className='text-canvas-text text-sm'>Manage your profile and security</p>
                     </div>
                 </div>
-
-                {session?.user.emailVerified ? null : (
-                    <Alert>
-                        <AlertTitle>Verify Your Email Address</AlertTitle>
-                        <AlertDescription className='text-canvas-text flex flex-col items-center justify-between gap-2 sm:flex-row'>
-                            Please verify your email address. Check your inbox for the verification email. If you
-                            haven't received the email, click the button below to resend.
-                            <Button
-                                size='sm'
-                                variant='outline'
-                                isLoading={emailVerificationPending}
-                                onClick={async () => {
-                                    await client.sendVerificationEmail(
-                                        {
-                                            email: session?.user.email || ''
-                                        },
-                                        {
-                                            onRequest(context) {
-                                                setEmailVerificationPending(true);
-                                            },
-                                            onError(context) {
-                                                toast.error(context.error.message);
-                                                setEmailVerificationPending(false);
-                                            },
-                                            onSuccess() {
-                                                toast.success('Verification email sent successfully');
-                                                setEmailVerificationPending(false);
-                                            }
-                                        }
-                                    );
-                                }}>
-                                Resend Verification Email
-                            </Button>
-                        </AlertDescription>
-                    </Alert>
-                )}
-
-                <div className='flex w-max flex-col gap-1 border-l-2 px-2'>
-                    <p className='text-xs font-medium'>Active Sessions</p>
-                    {activeSessions
-                        .filter((session) => session.userAgent)
-                        .map((session) => {
-                            return (
-                                <div key={session.id}>
-                                    <div className='text-canvas-on-canvas flex items-center gap-2 text-sm font-medium'>
-                                        {new UAParser(session.userAgent || '').getDevice().type === 'mobile' ? (
-                                            <MobileIcon />
-                                        ) : (
-                                            <Laptop size={16} />
+            </CardHeader>
+            <CardContent className='p-6'>
+                <div className='space-y-6'>
+                    {/* User Profile Section */}
+                    <div className='border-canvas-border rounded-lg border p-4'>
+                        <div className='flex flex-col sm:flex-row gap-4 items-start justify-between'>
+                            <div className='flex items-center gap-4'>
+                                <Avatar className='h-16 w-16'>
+                                    <AvatarImage
+                                        src={session?.user.image || undefined}
+                                        alt='Avatar'
+                                        className='object-cover'
+                                    />
+                                    <AvatarFallback className='bg-primary-bg text-primary-solid text-lg font-semibold'>
+                                        {session?.user.name.charAt(0)}
+                                    </AvatarFallback>
+                                </Avatar>
+                                <div className='space-y-1'>
+                                    <div className='flex items-center gap-2'>
+                                        <h3 className='text-canvas-text-contrast text-lg font-semibold'>
+                                            {session?.user.name}
+                                        </h3>
+                                        {!!subscription && (
+                                            <Badge className='bg-success-bg text-success-text border-success-border'>
+                                                <svg
+                                                    xmlns='http://www.w3.org/2000/svg'
+                                                    width='1em'
+                                                    height='1em'
+                                                    viewBox='0 0 24 24'
+                                                    className='mr-1'>
+                                                    <path
+                                                        fill='currentColor'
+                                                        d='m9.023 21.23l-1.67-2.814l-3.176-.685l.312-3.277L2.346 12L4.49 9.546L4.177 6.27l3.177-.685L9.023 2.77L12 4.027l2.977-1.258l1.67 2.816l3.176.684l-.312 3.277L21.655 12l-2.142 2.454l.311 3.277l-3.177.684l-1.669 2.816L12 19.973zm1.927-6.372L15.908 9.9l-.708-.72l-4.25 4.25l-2.15-2.138l-.708.708z'></path>
+                                                </svg>
+                                                Pro
+                                            </Badge>
                                         )}
-                                        {new UAParser(session.userAgent || '').getOS().name},{' '}
-                                        {new UAParser(session.userAgent || '').getBrowser().name}
-                                        <button
-                                            className='text-alert-text border-alert-solid cursor-pointer text-xs underline'
-                                            onClick={async () => {
-                                                setIsTerminating(session.id);
-                                                const res = await client.revokeSession({
-                                                    token: session.token
-                                                });
-
-                                                if (res.error) {
-                                                    toast.error(res.error.message);
-                                                } else {
-                                                    toast.success('Session terminated successfully');
-                                                    removeActiveSession(session.id);
-                                                }
-                                                if (session.id === props.session?.session.id) router.refresh();
-                                                setIsTerminating(undefined);
-                                            }}>
-                                            {isTerminating === session.id ? (
-                                                <Loader2 size={15} className='animate-spin' />
-                                            ) : session.id === props.session?.session.id ? (
-                                                'Sign Out'
-                                            ) : (
-                                                'Terminate'
-                                            )}
-                                        </button>
+                                    </div>
+                                    <p className='text-canvas-text'>{session?.user.email}</p>
+                                    <div className='flex items-center gap-2'>
+                                        <SubscriptionTierLabel
+                                            tier={(subscription as SubscriptionData)?.plan?.toLowerCase() as 'starter'}
+                                        />
                                     </div>
                                 </div>
-                            );
-                        })}
-                </div>
-                <div className='flex flex-wrap items-center justify-between gap-2 border-y py-4'>
-                    <div className='flex flex-col gap-2'>
-                        {/* <p className='text-sm'>Passkeys</p>
-                        <div className='flex flex-wrap gap-2'>
-                            <AddPasskey />
-                            <ListPasskeys />
-                        </div> */}
-                        <p className='text-sm'>Two Factor</p>
+                            </div>
+                            <div className='flex flex-col items-start sm:items-end gap-4'>
+                                <EditUserDialog />
+                                <Component
+                                    currentPlan={(subscription as SubscriptionData)?.plan?.toLowerCase() as 'starter'}
+                                    isTrial={(subscription as SubscriptionData)?.status === 'trialing'}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Email Verification Alert */}
+                    {session?.user.emailVerified ? null : (
+                        <Alert className='border-canvas-border border'>
+                            <AlertTitle className='text-canvas-text-contrast'>Verify Your Email Address</AlertTitle>
+                            <AlertDescription className='text-canvas-text flex flex-col items-center justify-between gap-4 sm:flex-row'>
+                                Please verify your email address. Check your inbox for the verification email.
+                                <Button
+                                    size='sm'
+                                    variant='outline'
+                                    className='border-canvas-border text-canvas-text hover:bg-canvas-bg-hover'
+                                    isLoading={emailVerificationPending}
+                                    onClick={async () => {
+                                        await client.sendVerificationEmail(
+                                            {
+                                                email: session?.user.email || ''
+                                            },
+                                            {
+                                                onRequest(context) {
+                                                    setEmailVerificationPending(true);
+                                                },
+                                                onError(context) {
+                                                    toast.error(context.error.message);
+                                                    setEmailVerificationPending(false);
+                                                },
+                                                onSuccess() {
+                                                    toast.success('Verification email sent successfully');
+                                                    setEmailVerificationPending(false);
+                                                }
+                                            }
+                                        );
+                                    }}>
+                                    Resend Email Verification
+                                </Button>
+                            </AlertDescription>
+                        </Alert>
+                    )}
+
+                    {/* Active Sessions Section */}
+                    <div className='space-y-3'>
+                        <div className='flex items-center gap-2'>
+                            <Monitor className='text-canvas-text h-4 w-4' />
+                            <h4 className='text-canvas-text-contrast font-medium'>Active Sessions</h4>
+                            <Badge variant='outline' className='text-xs'>
+                                {activeSessions.filter((session) => session.userAgent).length}
+                            </Badge>
+                        </div>
+                        <div className='space-y-2'>
+                            {activeSessions
+                                .filter((session) => session.userAgent)
+                                .map((session) => {
+                                    const ua = new UAParser(session.userAgent || '');
+                                    const device = ua.getDevice();
+                                    const os = ua.getOS();
+                                    const browser = ua.getBrowser();
+
+                                    return (
+                                        <div
+                                            key={session.id}
+                                            className='border-canvas-border bg-canvas-bg flex items-center justify-between rounded-lg border p-3'>
+                                            <div className='flex items-center gap-3'>
+                                                <div className='bg-primary-bg flex h-8 w-8 items-center justify-center rounded-md'>
+                                                    {device.type === 'mobile' ? (
+                                                        <MobileIcon className='text-primary-solid h-4 w-4' />
+                                                    ) : (
+                                                        <Laptop className='text-primary-solid h-4 w-4' />
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <p className='text-canvas-text-contrast text-sm font-medium'>
+                                                        {os.name} • {browser.name}
+                                                    </p>
+                                                    <p className='text-canvas-text text-xs'>
+                                                        {device.type === 'mobile' ? 'Mobile' : 'Desktop'} •{' '}
+                                                        {session.ipAddress || 'Unknown'}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <Button
+                                                size='sm'
+                                                variant='outline'
+                                                className=''
+                                                onClick={async () => {
+                                                    setIsTerminating(session.id);
+                                                    const res = await client.revokeSession({
+                                                        token: session.token
+                                                    });
+
+                                                    if (res.error) {
+                                                        toast.error(res.error.message);
+                                                    } else {
+                                                        toast.success('Session terminated successfully');
+                                                        removeActiveSession(session.id);
+                                                    }
+                                                    if (session.id === props.session?.session.id) router.refresh();
+                                                    setIsTerminating(undefined);
+                                                }}>
+                                                {isTerminating === session.id ? (
+                                                    <Loader2 size={15} className='animate-spin' />
+                                                ) : session.id === props.session?.session.id ? (
+                                                    'Sign Out'
+                                                ) : (
+                                                    'Terminate'
+                                                )}
+                                            </Button>
+                                        </div>
+                                    );
+                                })}
+                        </div>
+                    </div>
+
+                    {/* Two Factor Authentication Section */}
+                    <div className='space-y-3'>
+                        <div className='flex items-center gap-2'>
+                            <Key className='text-canvas-text h-4 w-4' />
+                            <h4 className='text-canvas-text-contrast font-medium'>Two Factor Authentication</h4>
+                        </div>
                         <div className='flex gap-2'>
                             {!!session?.user.twoFactorEnabled && (
                                 <Dialog>
@@ -293,7 +340,7 @@ export default function UserCard(props: {
                                 <DialogTrigger asChild>
                                     <Button
                                         variant={session?.user.twoFactorEnabled ? 'destructive' : 'outline'}
-                                        size='default'
+                                        size='sm'
                                         leadingIcon={
                                             session?.user.twoFactorEnabled ? (
                                                 <ShieldOff size={16} />
@@ -347,6 +394,7 @@ export default function UserCard(props: {
                                         <Button
                                             disabled={isPendingTwoFa}
                                             isLoading={isPendingTwoFa}
+                                            size='sm'
                                             onClick={async () => {
                                                 if (twoFaPassword.length < 8 && !twoFactorVerifyURI) {
                                                     toast.error('Password must be at least 8 characters');
@@ -412,241 +460,52 @@ export default function UserCard(props: {
                                 </DialogContent>
                             </Dialog>
                         </div>
-                    </div>
-                    <div className='flex flex-col gap-2'>
-                        {/* <p className='text-sm'>Two Factor</p>
-                        <div className='flex gap-2'>
-                            {!!session?.user.twoFactorEnabled && (
-                                <Dialog>
-                                    <DialogTrigger asChild>
-                                        <Button variant='outline' className='gap-2'>
-                                            <QrCode size={16} />
-                                            <span className='text-xs md:text-sm'>Scan QR Code</span>
-                                        </Button>
-                                    </DialogTrigger>
-                                    <DialogContent className='w-11/12 sm:max-w-[425px]'>
-                                        <DialogHeader>
-                                            <DialogTitle>Scan QR Code</DialogTitle>
-                                            <DialogDescription>Scan the QR code with your TOTP app</DialogDescription>
-                                        </DialogHeader>
-
-                                        {twoFactorVerifyURI ? (
-                                            <>
-                                                <div className='flex items-center justify-center'>
-                                                    <QRCode value={twoFactorVerifyURI} />
-                                                </div>
-                                                <div className='flex items-center justify-center gap-2'>
-                                                    <p className='text-canvas-text text-sm'>Copy URI to clipboard</p>
-                                                    <CopyButton textToCopy={twoFactorVerifyURI} />
-                                                </div>
-                                            </>
-                                        ) : (
-                                            <div className='flex flex-col gap-2'>
-                                                <PasswordInput
-                                                    value={twoFaPassword}
-                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                                        setTwoFaPassword(e.target.value)
-                                                    }
-                                                    placeholder='Enter Password'
-                                                />
-                                                <Button
-                                                    onClick={async () => {
-                                                        if (twoFaPassword.length < 8) {
-                                                            toast.error('Password must be at least 8 characters');
-
-
-                                                            return;
-                                                        }
-                                                        await client.twoFactor.getTotpUri(
-                                                            {
-                                                                password: twoFaPassword
-                                                            },
-                                                            {
-                                                                onSuccess(context) {
-                                                                    setTwoFactorVerifyURI(context.data.totpURI);
-                                                                }
-                                                            }
-                                                        );
-                                                        setTwoFaPassword('');
-                                                    }}>
-                                                    Show QR Code
-                                                </Button>
-                                            </div>
-                                        )}
-                                    </DialogContent>
-                                </Dialog>
-                            )}
-                            <Dialog open={twoFactorDialog} onOpenChange={setTwoFactorDialog}>
-                                <DialogTrigger asChild>
-                                    <Button
-                                        variant={session?.user.twoFactorEnabled ? 'destructive' : 'outline'}
-                                        size='default'
-                                        size='default'
-                                        leadingIcon={
-                                            session?.user.twoFactorEnabled ? (
-                                                <ShieldOff size={16} />
-                                            ) : (
-                                                <ShieldCheck size={16} />
-                                            )
-                                        }>
-                                        {`${session?.user.twoFactorEnabled ? 'Disable' : 'Enable'} 2FA`}
-                                        {`${session?.user.twoFactorEnabled ? 'Disable' : 'Enable'} 2FA`}
-                                    </Button>
-                                </DialogTrigger>
-                                <DialogContent className='w-11/12 sm:max-w-[425px]'>
-                                    <DialogHeader>
-                                        <DialogTitle>
-                                            {session?.user.twoFactorEnabled ? 'Disable 2FA' : 'Enable 2FA'}
-                                        </DialogTitle>
-                                        <DialogDescription>
-                                            {session?.user.twoFactorEnabled
-                                                ? 'Disable the second factor authentication from your account'
-                                                : 'Enable 2FA to secure your account'}
-                                        </DialogDescription>
-                                    </DialogHeader>
-
-                                    {twoFactorVerifyURI ? (
-                                        <div className='flex flex-col gap-2'>
-                                            <div className='flex items-center justify-center'>
-                                                <QRCode value={twoFactorVerifyURI} />
-                                            </div>
-                                            <Label htmlFor='password'>Scan the QR code with your TOTP app</Label>
-                                            <Input
-                                                value={twoFaPassword}
-                                                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                                    setTwoFaPassword(e.target.value)
-                                                }
-                                                placeholder='Enter OTP'
-                                            />
-                                        </div>
-                                    ) : (
-                                        <div className='flex flex-col gap-2'>
-                                            <Label htmlFor='password'>Password</Label>
-                                            <PasswordInput
-                                                id='password'
-                                                placeholder='Password'
-                                                value={twoFaPassword}
-                                                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                                    setTwoFaPassword(e.target.value)
-                                                }
-                                            />
-                                        </div>
-                                    )}
-                                    <DialogFooter>
-                                        <Button
-                                            disabled={isPendingTwoFa}
-                                            isLoading={isPendingTwoFa}
-                                            onClick={async () => {
-                                                if (twoFaPassword.length < 8 && !twoFactorVerifyURI) {
-                                                    toast.error('Password must be at least 8 characters');
-
-
-                                                    return;
-                                                }
-                                                setIsPendingTwoFa(true);
-                                                if (session?.user.twoFactorEnabled) {
-                                                    const res = await client.twoFactor.disable({
-                                                        password: twoFaPassword,
-                                                        fetchOptions: {
-                                                            onError(context) {
-                                                                toast.error(context.error.message);
-                                                            },
-                                                            onSuccess() {
-                                                                toast('2FA disabled successfully');
-                                                                setTwoFactorDialog(false);
-                                                            }
-                                                        }
-                                                    });
-                                                } else {
-                                                    if (twoFactorVerifyURI) {
-                                                        await client.twoFactor.verifyTotp({
-                                                            code: twoFaPassword,
-                                                            fetchOptions: {
-                                                                onError(context) {
-                                                                    setIsPendingTwoFa(false);
-                                                                    setTwoFaPassword('');
-                                                                    toast.error(context.error.message);
-                                                                },
-                                                                onSuccess() {
-                                                                    toast('2FA enabled successfully');
-                                                                    setTwoFactorVerifyURI('');
-                                                                    setIsPendingTwoFa(false);
-                                                                    setTwoFaPassword('');
-                                                                    setTwoFactorDialog(false);
-                                                                }
-                                                            }
-                                                        });
-
-
-                                                        return;
-                                                    }
-                                                    const res = await client.twoFactor.enable({
-                                                        password: twoFaPassword,
-                                                        fetchOptions: {
-                                                            onError(context) {
-                                                                toast.error(context.error.message);
-                                                            },
-                                                            onSuccess(ctx) {
-                                                                setTwoFactorVerifyURI(ctx.data.totpURI);
-                                                                // toast.success("2FA enabled successfully");
-                                                                // setTwoFactorDialog(false);
-                                                            }
-                                                        }
-                                                    });
-                                                }
-                                                setIsPendingTwoFa(false);
-                                                setTwoFaPassword('');
-                                            }}>
-                                            session?.user.twoFactorEnabled ? "Disable 2FA" : "Enable 2FA"
-                                        </Button>
-                                    </DialogFooter>
-                                </DialogContent>
-                            </Dialog>
-                        </div> */}
                     </div>
                 </div>
             </CardContent>
-            <CardFooter className='items-center justify-between gap-2'>
-                <ChangePassword />
-                {session?.session.impersonatedBy ? (
-                    <Button
-                        className='z-10 gap-2'
-                        variant='outline'
-                        onClick={async () => {
-                            setIsSignOut(true);
-                            await client.admin.stopImpersonating();
-                            setIsSignOut(false);
-                            toast.info('Impersonation stopped successfully');
-                            router.push('/admin');
-                        }}
-                        disabled={isSignOut}
-                        isLoading={isSignOut}>
-                        <span className='text-sm'>
-                            <StopCircle size={16} color='red' />
+            <CardFooter className='rounded-b-lg border-canvas-line bg-canvas-bg-subtle border-t p-6'>
+                <div className='flex w-full items-center justify-between'>
+                    <div className='flex items-center'>
+                        <ChangePassword />
+                    </div>
+                    {session?.session.impersonatedBy ? (
+                        <Button
+                            className='border-alert-border text-alert-text hover:bg-alert-bg gap-2'
+                            variant='outline'
+                            onClick={async () => {
+                                setIsSignOut(true);
+                                await client.admin.stopImpersonating();
+                                setIsSignOut(false);
+                                toast.info('Impersonation stopped successfully');
+                                router.push('/admin');
+                            }}
+                            disabled={isSignOut}
+                            isLoading={isSignOut}>
+                            <StopCircle size={16} />
                             Stop Impersonation
-                        </span>
-                    </Button>
-                ) : (
-                    <Button
-                        className='z-10'
-                        variant='outline'
-                        onClick={async () => {
-                            setIsSignOut(true);
-                            await signOut({
-                                fetchOptions: {
-                                    onSuccess() {
-                                        router.push('/');
+                        </Button>
+                    ) : (
+                        <Button
+                            className='border-canvas-border text-canvas-text hover:bg-canvas-bg-hover'
+                            variant='outline'
+                            onClick={async () => {
+                                setIsSignOut(true);
+                                await signOut({
+                                    fetchOptions: {
+                                        onSuccess() {
+                                            router.refresh();
+                                        }
                                     }
-                                }
-                            });
-                            setIsSignOut(false);
-                        }}
-                        disabled={isSignOut}
-                        isLoading={isSignOut}
-                        leadingIcon={<LogOut size={16} />}>
-                        Sign Out
-                    </Button>
-                )}
+                                });
+                                setIsSignOut(false);
+                            }}
+                            disabled={isSignOut}
+                            isLoading={isSignOut}
+                            leadingIcon={<LogOut size={16} />}>
+                            Sign Out
+                        </Button>
+                    )}
+                </div>
             </CardFooter>
         </Card>
     );
@@ -669,14 +528,12 @@ function ChangePassword() {
     const [open, setOpen] = useState<boolean>(false);
     const [signOutDevices, setSignOutDevices] = useState<boolean>(false);
 
-
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button
                     className='z-10'
                     variant='outline'
-                    size='default'
                     leadingIcon={
                         <svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'>
                             <path
@@ -731,12 +588,10 @@ function ChangePassword() {
                             if (newPassword !== confirmPassword) {
                                 toast.error('Passwords do not match');
 
-
                                 return;
                             }
                             if (newPassword.length < 8) {
                                 toast.error('Password must be at least 8 characters');
-
 
                                 return;
                             }
@@ -787,11 +642,10 @@ function EditUserDialog() {
     const [open, setOpen] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button size='default' variant='outline' leadingIcon={<Edit size={13} />}>
+                <Button size='sm' variant='outline' leadingIcon={<Edit size={13} />}>
                     Edit User
                 </Button>
             </DialogTrigger>
@@ -844,6 +698,7 @@ function EditUserDialog() {
                     <Button
                         disabled={isLoading}
                         isLoading={isLoading}
+                        size='sm'
                         onClick={async () => {
                             setIsLoading(true);
                             await client.updateUser({
@@ -882,7 +737,6 @@ function AddPasskey() {
         if (!passkeyName) {
             toast.error('Passkey name is required');
 
-
             return;
         }
         setIsLoading(true);
@@ -898,11 +752,10 @@ function AddPasskey() {
         setIsLoading(false);
     };
 
-
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button variant='outline' leadingIcon={<Plus size={15} />}>
+                <Button variant='outline' size='sm' leadingIcon={<Plus size={15} />}>
                     Add New Passkey
                 </Button>
             </DialogTrigger>
@@ -961,7 +814,7 @@ function AddPasskey() {
 //     };
 //     const [isLoading, setIsLoading] = useState(false);
 //     const [isDeletePasskey, setIsDeletePasskey] = useState<boolean>(false);
-    
+
 //     return (
 //         <Dialog open={isOpen} onOpenChange={setIsOpen}>
 //             <DialogTrigger asChild>

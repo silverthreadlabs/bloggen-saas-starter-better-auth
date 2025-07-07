@@ -6,18 +6,21 @@ import Link from 'next/link';
 
 import Logo from '@/components/logo/logo';
 import { Button } from '@/components/ui/button';
+import { Session } from '@/lib/auth/auth-types';
 
 import { FaBars, FaTimes } from 'react-icons/fa';
 
 const NAV_ITEMS = [
-    { href: '/features', label: 'Features' },
     { href: '/docs', label: 'Docs' },
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/features', label: 'Features' },
     { href: '/blog', label: 'Blog' }
 ];
 
-export default function Header() {
+export default function Header({ session }: { session: Session }) {
     console.log('Crafted by Silverthread Labs:', 'https://www.silverthreadlabs.com');
     const [mobileOpen, setMobileOpen] = useState(false);
+
     const toggleMobile = () => setMobileOpen((open) => !open);
 
     return (
@@ -41,7 +44,9 @@ export default function Header() {
                                 </li>
                             ))}
                         </ul>
-                        <Link href='/contact' className='flex-1'>
+                    </nav>
+                    <div className='hidden items-center gap-2 md:flex'>
+                        <Link href='/contact' className='flex'>
                             <Button
                                 color='primary'
                                 size='default'
@@ -51,7 +56,31 @@ export default function Header() {
                                 Contact
                             </Button>
                         </Link>
-                    </nav>
+
+                        {session ? (
+                            <Link href='/dashboard' className='flex'>
+                                <Button
+                                    color='primary'
+                                    size='default'
+                                    variant='outline'
+                                    aria-label='Contact Us'
+                                    name='Contact Us'>
+                                    Dashboard
+                                </Button>
+                            </Link>
+                        ) : (
+                            <Link href='/sign-in' className='flex'>
+                                <Button
+                                    color='primary'
+                                    size='default'
+                                    variant='outline'
+                                    aria-label='Contact Us'
+                                    name='Contact Us'>
+                                    Sign In
+                                </Button>
+                            </Link>
+                        )}
+                    </div>
 
                     {/* Mobile menu button - visible on small screens, hidden on md and up */}
                     <Button
@@ -103,6 +132,31 @@ export default function Header() {
                                         Contact
                                     </Button>
                                 </Link>
+                                {session ? (
+                                    <Link href='/dashboard' className='flex'>
+                                        <Button
+                                            color='primary'
+                                            size='default'
+                                            variant='outline'
+                                            aria-label='Contact Us'
+                                            name='Contact Us'
+                                            fullWidth>
+                                            Dashboard
+                                        </Button>
+                                    </Link>
+                                ) : (
+                                    <Link href='/sign-in' className='flex'>
+                                        <Button
+                                            color='primary'
+                                            size='default'
+                                            variant='outline'
+                                            aria-label='Contact Us'
+                                            name='Contact Us'
+                                            fullWidth>
+                                            Sign In
+                                        </Button>
+                                    </Link>
+                                )}
                             </div>
                         </li>
                     </ul>
