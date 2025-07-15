@@ -4,11 +4,20 @@ import React, { useState } from 'react';
 
 import Link from 'next/link';
 
-import Logo from '@/components/logo/logo';
+import { LogoDark, LogoLight } from '@/components/logo/logo';
 import { Button } from '@/components/ui/button';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
+import { signOut } from '@/lib/auth/auth-client';
 import { Session } from '@/lib/auth/auth-types';
 
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { LogOut, Settings } from 'lucide-react';
+import { FaBars, FaTimes, FaUser } from 'react-icons/fa';
 
 const NAV_ITEMS = [
     { href: '/docs', label: 'Docs' },
@@ -29,7 +38,15 @@ export default function Header({ session }: { session: Session }) {
             role='banner'>
             <div className='mx-auto max-w-7xl px-4 xl:px-0'>
                 <div className='flex h-16 items-center justify-between'>
-                    <Logo />
+                    <Link href='/' className='flex flex-row items-center gap-2'>
+                        <div className='dark:hidden'>
+                            <LogoLight />
+                        </div>
+                        <div className='hidden dark:block'>
+                            <LogoDark />
+                        </div>
+                        <div className='text-canvas-text mt-0.5 flex text-sm font-bold'>SAAS Starter</div>
+                    </Link>
 
                     {/* Desktop nav - hidden on small screens, visible on md and up */}
                     <nav aria-label='Primary navigation' className='hidden items-center space-x-4 md:flex'>
@@ -58,16 +75,42 @@ export default function Header({ session }: { session: Session }) {
                         </Link>
 
                         {session ? (
-                            <Link href='/dashboard' className='flex'>
-                                <Button
-                                    color='primary'
-                                    size='default'
-                                    variant='outline'
-                                    aria-label='Contact Us'
-                                    name='Contact Us'>
-                                    Dashboard
-                                </Button>
-                            </Link>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Button
+                                        color='primary'
+                                        size='default'
+                                        variant='outline'
+                                        aria-label='User menu'
+                                        name='User menu'
+                                        iconOnly
+                                        leadingIcon={<FaUser />}
+                                    />
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align='end' className='w-48'>
+                                    <DropdownMenuItem className='cursor-pointer' asChild>
+                                        <Link href='/dashboard' className='flex items-center'>
+                                            <Settings className='mr-2 h-4 w-4' />
+                                            <span>Settings</span>
+                                        </Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem
+                                        onClick={async () => {
+                                            await signOut({
+                                                fetchOptions: {
+                                                    onSuccess: () => {
+                                                        window.location.href = '/';
+                                                    }
+                                                }
+                                            });
+                                        }}
+                                        className='text-alert-text flex cursor-pointer items-center'>
+                                        <LogOut className='mr-2 h-4 w-4' />
+                                        <span>Sign out</span>
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
                         ) : (
                             <Link href='/sign-in' className='flex'>
                                 <Button

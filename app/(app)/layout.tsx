@@ -13,13 +13,11 @@ export default async function MainLayout({ children }: { children: React.ReactNo
     });
     
     return (
-        // <body className='antialiased lg:mx-auto' suppressHydrationWarning>
         <>
             <Banner />
             <Header session={session as unknown as Session} />
             {children}
             <Footer />
         </>
-        // </body>
     );
 }

@@ -87,13 +87,11 @@ const PasswordInput = React.forwardRef<
 				className={cn("hide-password-toggle pr-10", className)}
 				ref={ref}
 			/>
-			<Button
-				type="button"
-				variant="ghost"
-				size="sm"
-				className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+			<div
+				className="absolute right-0 top-0 h-full flex items-center justify-center w-10 hover:cursor-pointer"
 				onClick={() => setShowPassword((prev) => !prev)}
-				disabled={disabled}
+				role="button"
+				tabIndex={disabled ? -1 : 0}
 			>
 				{showPassword && !disabled ? (
 					<EyeIcon className="h-4 w-4" aria-hidden="true" />
@@ -103,7 +101,7 @@ const PasswordInput = React.forwardRef<
 				<span className="sr-only">
 					{showPassword ? "Hide password" : "Show password"}
 				</span>
-			</Button>
+			</div>
 
 			{/* hides browsers password toggles */}
 			<style>{`

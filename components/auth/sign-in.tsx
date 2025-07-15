@@ -10,6 +10,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
@@ -178,9 +179,8 @@ export default function SignIn() {
                 Forgot your password?
               </Link>
             </div>
-            <Input
+            <PasswordInput
               id="password"
-              type="password"
               placeholder="password"
               autoComplete="current-password"
               required

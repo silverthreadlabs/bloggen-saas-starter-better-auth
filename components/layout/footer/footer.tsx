@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import Logo from '@/components/logo/logo';
+import { LogoDark, LogoLight } from '@/components/logo/logo';
 import { ThemeSwitcher } from '@/components/ui/theme-switcher';
 
 import SocialLinks from './social-links';
@@ -29,12 +29,20 @@ export default function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className='bg-canvas-bg-subtle border-canvas-bg-hover w-full z-50 border-t shadow-inner'>
+        <footer className='bg-canvas-bg-subtle border-canvas-bg-hover z-50 w-full border-t shadow-inner'>
             <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
                 <div className='py-12'>
                     <div className={'flex flex-col items-start justify-between space-y-8 md:flex-row md:space-y-0'}>
                         <div className='flex flex-col space-y-4'>
-                            <Logo />
+                            <div className='flex flex-row items-center gap-2'>
+                                <div className='dark:hidden'>
+                                    <LogoLight />
+                                </div>
+                                <div className='hidden dark:block'>
+                                    <LogoDark />
+                                </div>
+                                <div className='text-canvas-text mt-0.5 flex text-sm font-bold'>SAAS Starter</div>
+                            </div>
                             <nav className='flex flex-wrap gap-4'>
                                 {NAV_ITEMS.map(({ href, label }) => (
                                     <Link

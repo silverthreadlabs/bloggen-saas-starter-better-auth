@@ -5,15 +5,15 @@ import { auth } from '@/lib/auth/auth';
 import DashboardLayout from '@/components/dashboard/dashboard-layout';
 import Sidebar from '@/components/ui/sidebar';
 import SidebarItem from '@/components/ui/sidebar-items';
-import ProfileSection from '@/components/dashboard/profile-section';
+import OrganizationSection from '@/components/dashboard/organization-section';
 import { User, Users, Shield, CreditCard, Settings } from 'lucide-react';
 
-export default async function DashboardPage() {
-    const [session, subscriptions] = await Promise.all([
+export default async function OrganizationPage() {
+    const [session, organization] = await Promise.all([
         auth.api.getSession({
             headers: await headers()
         }),
-        auth.api.listActiveSubscriptions({
+        auth.api.getFullOrganization({
             headers: await headers()
         })
     ]).catch((e) => {
@@ -33,10 +33,10 @@ export default async function DashboardPage() {
 
     return (
         <DashboardLayout sidebar={sidebar}>
-            <ProfileSection
+            <OrganizationSection
                 session={JSON.parse(JSON.stringify(session))}
-                subscription={subscriptions.find((sub) => sub.status === 'active' || sub.status === 'trialing')}
+                activeOrganization={JSON.parse(JSON.stringify(organization))}
             />
         </DashboardLayout>
     );
-}
+} 
