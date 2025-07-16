@@ -26,7 +26,7 @@ export default function NotFound() {
                     <div className='pt-4'>
                         <Link
                             href='/'
-                            className='group inline-flex items-center justify-center rounded-lg border border-slate-700 bg-slate-800 px-8 py-3 text-white transition-all duration-300 hover:border-slate-600 hover:bg-slate-700'>
+                            className='group inline-flex items-center justify-center rounded-sm border border-slate-700 bg-slate-800 px-8 py-3 text-white transition-all duration-300 hover:border-slate-600 hover:bg-slate-700'>
                             <svg
                                 className='mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1'
                                 fill='none'

@@ -72,7 +72,7 @@ export default function SecuritySection({ session, activeSessions: initialActive
             <Card className='border-canvas-border bg-canvas-bg'>
                 <CardHeader className='border-canvas-border bg-canvas-bg-subtle border-b'>
                     <div className='flex items-center gap-3'>
-                        <div className='bg-primary-bg flex h-10 w-10 items-center justify-center rounded-lg'>
+                        <div className='bg-primary-bg flex h-10 w-10 items-center justify-center rounded-sm'>
                             <Monitor className='text-primary-solid h-5 w-5' />
                         </div>
                         <div>
@@ -95,14 +95,14 @@ export default function SecuritySection({ session, activeSessions: initialActive
                                 return (
                                     <div
                                         key={session.id}
-                                        className={`flex items-center justify-between rounded-lg border p-4 ${
+                                        className={`flex items-center justify-between rounded-sm border p-4 ${
                                             isCurrentSession
                                                 ? 'border-primary-border bg-primary-bg'
                                                 : 'border-canvas-border bg-canvas-bg-subtle'
                                         }`}>
                                         <div className='flex items-center gap-4'>
                                             <div
-                                                className={`flex h-12 w-12 items-center justify-center rounded-lg ${
+                                                className={`flex h-12 w-12 items-center justify-center rounded-sm ${
                                                     isCurrentSession ? 'bg-primary-solid' : 'bg-canvas-bg-active'
                                                 }`}>
                                                 {device.type === 'mobile' ? (
@@ -185,7 +185,7 @@ export default function SecuritySection({ session, activeSessions: initialActive
             <Card className='border-canvas-border bg-canvas-bg'>
                 <CardHeader className='border-canvas-border bg-canvas-bg-subtle border-b'>
                     <div className='flex items-center gap-3'>
-                        <div className='bg-primary-bg flex h-10 w-10 items-center justify-center rounded-lg'>
+                        <div className='bg-primary-bg flex h-10 w-10 items-center justify-center rounded-sm'>
                             <Shield className='text-primary-solid h-5 w-5' />
                         </div>
                         <div>
@@ -198,7 +198,7 @@ export default function SecuritySection({ session, activeSessions: initialActive
                     <div className='flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center'>
                         <div className='flex items-center gap-3'>
                             <div
-                                className={`flex h-12 w-12 items-center justify-center rounded-lg ${
+                                className={`flex h-12 w-12 items-center justify-center rounded-sm ${
                                     currentSession?.user.twoFactorEnabled ? 'bg-success-bg' : 'bg-warning-bg'
                                 }`}>
                                 {currentSession?.user.twoFactorEnabled ? (
@@ -230,7 +230,7 @@ export default function SecuritySection({ session, activeSessions: initialActive
             <Card className='border-canvas-border bg-canvas-bg'>
                 <CardHeader className='border-canvas-border bg-canvas-bg-subtle border-b'>
                     <div className='flex items-center gap-3'>
-                        <div className='bg-primary-bg flex h-10 w-10 items-center justify-center rounded-lg'>
+                        <div className='bg-primary-bg flex h-10 w-10 items-center justify-center rounded-sm'>
                             <Key className='text-primary-solid h-5 w-5' />
                         </div>
                         <div>
@@ -322,7 +322,7 @@ function TwoFactorQRDialog() {
 
                 {twoFactorVerifyURI ? (
                     <div className='space-y-4'>
-                        <div className='flex items-center justify-center rounded-lg bg-white p-4'>
+                        <div className='flex items-center justify-center rounded-sm bg-white p-4'>
                             <QRCode value={twoFactorVerifyURI} size={200} />
                         </div>
                         <div className='flex items-center justify-center gap-2'>
@@ -345,7 +345,8 @@ function TwoFactorQRDialog() {
                             onClick={async () => {
                                 if (twoFaPassword.length < 8) {
                                     toast.error('Password must be at least 8 characters');
-                                    return;
+                                    
+return;
                                 }
                                 await client.twoFactor.getTotpUri(
                                     { password: twoFaPassword },
@@ -405,7 +406,7 @@ function TwoFactorToggleDialog() {
                 <div className='space-y-4'>
                     {twoFactorVerifyURI ? (
                         <div className='space-y-4'>
-                            <div className='flex items-center justify-center rounded-lg bg-white p-4'>
+                            <div className='flex items-center justify-center rounded-sm bg-white p-4'>
                                 <QRCode value={twoFactorVerifyURI} size={200} />
                             </div>
                             <div className='space-y-2'>
@@ -439,7 +440,8 @@ function TwoFactorToggleDialog() {
                         onClick={async () => {
                             if (twoFaPassword.length < 6 && !twoFactorVerifyURI) {
                                 toast.error('Password must be at least 8 characters');
-                                return;
+                                
+return;
                             }
                             setIsPendingTwoFa(true);
 
@@ -570,11 +572,13 @@ function ChangePasswordDialog() {
                         onClick={async () => {
                             if (newPassword !== confirmPassword) {
                                 toast.error('Passwords do not match');
-                                return;
+                                
+return;
                             }
                             if (newPassword.length < 8) {
                                 toast.error('Password must be at least 8 characters');
-                                return;
+                                
+return;
                             }
                             setLoading(true);
                             const res = await client.changePassword({

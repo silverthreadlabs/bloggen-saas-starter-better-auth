@@ -75,10 +75,10 @@ function FeatureCard({ icon, title, descriptionStart, code, descriptionEnd, link
         >
            
             {/* Glow effect */}
-            <div className={`absolute -inset-0.5 rounded-2xl blur opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+            <div className={`absolute -inset-0.5 rounded-sm blur opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
             
             {/* Main card */}
-            <div className={`relative rounded-2xl border border-canvas-line p-8 shadow-lg transition-all duration-500 group-hover:shadow-2xl overflow-hidden`}>
+            <div className={`relative rounded-sm border border-canvas-line p-8 shadow-lg transition-all duration-500 group-hover:shadow-2xl overflow-hidden`}>
                 {/* Background gradient overlay */}
                 <div className={`absolute inset-0 bg-gradient-to-r ${color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
                 
@@ -86,12 +86,12 @@ function FeatureCard({ icon, title, descriptionStart, code, descriptionEnd, link
                 <div className="flex flex-col z-10">
                     {/* Icon section */}
                     <div className="flex items-center justify-between mb-6">
-                        <div className={`relative p-4 rounded-2xl bg-gradient-to-br ${color} shadow-lg transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-3`}>
+                        <div className={`relative p-4 rounded-sm bg-gradient-to-br ${color} shadow-lg transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-3`}>
                             <div className="text-white">
                                 {icon}
                             </div>
                             {/* Icon glow */}
-                            <div className={`absolute inset-0 bg-gradient-to-br ${color} rounded-2xl blur-md opacity-0 group-hover:opacity-40 transition-opacity duration-500 -z-10`}></div>
+                            <div className={`absolute inset-0 bg-gradient-to-br ${color} rounded-sm blur-md opacity-0 group-hover:opacity-40 transition-opacity duration-500 -z-10`}></div>
                         </div>
                         
                         {link && (
@@ -111,7 +111,7 @@ function FeatureCard({ icon, title, descriptionStart, code, descriptionEnd, link
                         <p className="transition-colors duration-300 group-hover:text-canvas-text-contrast">
                             {descriptionStart}
                             {code && (
-                                <span className={`inline-flex items-center px-3 py-1 rounded-lg bg-canvas-bg border text-sm font-mono font-medium text-canvas-text-contrast mx-1 transition-all duration-300`}>
+                                <span className={`inline-flex items-center px-3 py-1 rounded-sm bg-canvas-bg border text-sm font-mono font-medium text-canvas-text-contrast mx-1 transition-all duration-300`}>
                                     {code}
                                 </span>
                             )}

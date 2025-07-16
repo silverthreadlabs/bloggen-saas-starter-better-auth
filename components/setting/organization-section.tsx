@@ -88,9 +88,9 @@ export default function OrganizationSection({ session, activeOrganization }: Org
             {/* Organization Selector */}
             <Card className="border-canvas-border bg-canvas-bg">
                 <CardHeader className="border-b border-canvas-border bg-canvas-bg-subtle">
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
                         <div className="flex items-center gap-3">
-                            <div className="bg-primary-bg flex h-10 w-10 items-center justify-center rounded-lg">
+                            <div className="bg-primary-bg flex h-10 w-10 items-center justify-center rounded-sm">
                                 <Building2 className="text-primary-solid h-5 w-5" />
                             </div>
                             <div>
@@ -210,7 +210,7 @@ export default function OrganizationSection({ session, activeOrganization }: Org
                 <CardHeader className="border-b border-canvas-border bg-canvas-bg-subtle">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                            <div className="bg-primary-bg flex h-10 w-10 items-center justify-center rounded-lg">
+                            <div className="bg-primary-bg flex h-10 w-10 items-center justify-center rounded-sm">
                                 <Users className="text-primary-solid h-5 w-5" />
                             </div>
                             <div>
@@ -233,7 +233,7 @@ export default function OrganizationSection({ session, activeOrganization }: Org
                         {optimisticOrg?.members.map((member) => (
                             <div
                                 key={member.id}
-                                className="flex items-center justify-between p-4 rounded-lg border border-canvas-border bg-canvas-bg-subtle"
+                                className="flex items-center justify-between p-4 rounded-sm border border-canvas-border bg-canvas-bg-subtle"
                             >
                                 <div className="flex items-center gap-3">
                                     <Avatar className="h-10 w-10">
@@ -277,7 +277,7 @@ export default function OrganizationSection({ session, activeOrganization }: Org
                             </div>
                         ))}
                         {!optimisticOrg?.id && (
-                            <div className="flex items-center justify-between p-4 rounded-lg border border-canvas-border bg-canvas-bg-subtle">
+                            <div className="flex items-center justify-between p-4 rounded-sm border border-canvas-border bg-canvas-bg-subtle">
                                 <div className="flex items-center gap-3">
                                     <Avatar className="h-10 w-10">
                                         <AvatarImage src={currentSession?.user.image || undefined} />
@@ -306,7 +306,7 @@ export default function OrganizationSection({ session, activeOrganization }: Org
                 <Card className="border-canvas-border bg-canvas-bg">
                     <CardHeader className="border-b border-canvas-border bg-canvas-bg-subtle">
                         <div className="flex items-center gap-3">
-                            <div className="bg-warning-bg flex h-10 w-10 items-center justify-center rounded-lg">
+                            <div className="bg-warning-bg flex h-10 w-10 items-center justify-center rounded-sm">
                                 <MailPlus className="text-warning-text h-5 w-5" />
                             </div>
                             <div>
@@ -327,10 +327,10 @@ export default function OrganizationSection({ session, activeOrganization }: Org
                                         initial="hidden"
                                         animate="visible"
                                         exit="exit"
-                                        className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between p-4 rounded-lg border border-warning-border bg-warning-bg"
+                                        className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between p-4 rounded-sm border border-warning-border bg-warning-bg"
                                     >
                                         <div className="flex items-center gap-3">
-                                            <div className="bg-warning-bg-active flex h-10 w-10 items-center justify-center rounded-lg">
+                                            <div className="bg-warning-bg-active flex h-10 w-10 items-center justify-center rounded-sm">
                                                 <MailPlus className="text-warning-text h-5 w-5" />
                                             </div>
                                             <div>
@@ -448,7 +448,7 @@ function CreateOrganizationDialog() {
                                 <Image
                                     src={logo}
                                     alt="Logo preview"
-                                    className="w-16 h-16 object-cover rounded-lg border border-canvas-border"
+                                    className="w-16 h-16 object-cover rounded-sm border border-canvas-border"
                                     width={64}
                                     height={64}
                                 />

@@ -165,7 +165,7 @@ const PlayGroundCard: React.FC<PlayGroundCardProps> = ({ className = '' }) => {
 
                 {/* Product Card */}
                 <div
-                    className={`product-card-themed ${isDarkMode ? 'dark' : ''} relative transform overflow-hidden rounded-3xl border transition-all duration-700 ${isAnimating ? 'scale-95 opacity-70' : 'scale-100 opacity-100'} bg-canvas-bg border-canvas-border mx-auto`}>
+                    className={`product-card-themed ${isDarkMode ? 'dark' : ''} relative transform overflow-hidden rounded-sm border transition-all duration-700 ${isAnimating ? 'scale-95 opacity-70' : 'scale-100 opacity-100'} bg-canvas-bg border-canvas-border mx-auto`}>
                     <div className='flex flex-col justify-between gap-4 p-6'>
                         {/* Header with Heart */}
                         <div className='flex items-start justify-between'>
@@ -201,7 +201,7 @@ const PlayGroundCard: React.FC<PlayGroundCardProps> = ({ className = '' }) => {
                                     variant={selectedSize === size ? 'solid' : 'surface'}
                                     color={selectedSize === size ?  `${currentTheme === 'minimal' ? 'neutral' : 'primary'}` : 'neutral'}
                                     size='sm'
-                                    className={`${currentTheme === 'minimal' ? 'rounded-md' : 'rounded-xl'}`}>
+                                    className={`${currentTheme === 'minimal' ? 'rounded-md' : 'rounded-sm'}`}>
                                     {size}
                                 </Button>
                             ))}
@@ -215,7 +215,7 @@ const PlayGroundCard: React.FC<PlayGroundCardProps> = ({ className = '' }) => {
                                 color={currentTheme === 'minimal' ? 'neutral' : 'primary'} 
                                 size='default' 
                                 fullWidth 
-                                className={`${currentTheme === 'minimal' ? 'rounded-md' : 'rounded-xl'}`}>
+                                className={`${currentTheme === 'minimal' ? 'rounded-md' : 'rounded-sm'}`}>
                                 Buy Now
                             </Button>
 
@@ -224,7 +224,7 @@ const PlayGroundCard: React.FC<PlayGroundCardProps> = ({ className = '' }) => {
                                 color={currentTheme === 'minimal' ? 'neutral' : 'primary'} 
                                 size='default' 
                                 fullWidth 
-                                className={`${currentTheme === 'minimal' ? 'rounded-md' : 'rounded-xl'}`}>
+                                className={`${currentTheme === 'minimal' ? 'rounded-md' : 'rounded-sm'}`}>
                                 Add to Cart
                             </Button>
                         </div>

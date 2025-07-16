@@ -145,7 +145,7 @@ export default function ContactForm() {
             </div>
 
             {submitStatus === 'success' && (
-                <div className='bg-success-bg border-success-border mb-6 rounded-lg border p-4'>
+                <div className='bg-success-bg border-success-border mb-6 rounded-sm border p-4'>
                     <p className='text-success-text font-medium'>
                         Thank you! Your message has been sent successfully. We'll get back to you soon.
                     </p>
@@ -153,7 +153,7 @@ export default function ContactForm() {
             )}
 
             {submitStatus === 'error' && (
-                <div className='bg-alert-bg border-alert-border mb-6 rounded-lg border p-4'>
+                <div className='bg-alert-bg border-alert-border mb-6 rounded-sm border p-4'>
                     <p className='text-alert-text font-medium'>
                         Something went wrong. Please try again or contact us directly.
                     </p>

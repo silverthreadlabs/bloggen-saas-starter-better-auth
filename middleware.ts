@@ -5,7 +5,7 @@ export function middleware(request: NextRequest) {
   // const token = request.cookies.get('auth-token')
   
   // // Check if accessing protected routes
-  // if (request.nextUrl.pathname.startsWith('/dashboard') || 
+  // if (request.nextUrl.pathname.startsWith('/setting') || 
   //     request.nextUrl.pathname.startsWith('/admin') ||
   //     request.nextUrl.pathname.startsWith('/accept-invitation')) {
   //   if (!token) {

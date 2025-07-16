@@ -2,10 +2,10 @@ import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 import { auth } from '@/lib/auth/auth';
-import DashboardLayout from '@/components/dashboard/dashboard-layout';
+import DashboardLayout from '@/components/setting/setting-layout';
 import Sidebar from '@/components/ui/sidebar';
 import SidebarItem from '@/components/ui/sidebar-items';
-import OrganizationSection from '@/components/dashboard/organization-section';
+import OrganizationSection from '@/components/setting/organization-section';
 import { User, Users, Shield, CreditCard, Settings } from 'lucide-react';
 
 export default async function OrganizationPage() {
@@ -23,11 +23,11 @@ export default async function OrganizationPage() {
 
     const sidebar = (
         <Sidebar>
-            <SidebarItem label="Profile" href="/dashboard" icon={<User />} />
-            <SidebarItem label="Organization" href="/dashboard/organization" icon={<Users />} />
-            <SidebarItem label="Security" href="/dashboard/security" icon={<Shield />} />
-            {/* <SidebarItem label="Billing" href="/dashboard/billing" icon={<CreditCard />} />
-            <SidebarItem label="Settings" href="/dashboard/settings" icon={<Settings />} /> */}
+            <SidebarItem label="Profile" href="/setting" icon={<User />} />
+            <SidebarItem label="Organization" href="/setting/organization" icon={<Users />} />
+            <SidebarItem label="Security" href="/setting/security" icon={<Shield />} />
+            {/* <SidebarItem label="Billing" href="/setting/billing" icon={<CreditCard />} />
+            <SidebarItem label="Settings" href="/setting/settings" icon={<Settings />} /> */}
         </Sidebar>
     );
 

@@ -1,0 +1,21 @@
+@keyframes slideAnim {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .loop__innerList {
+    @apply flex justify-center w-fit;
+  }
+  
+  .loop__innerList[data-animate="true"] .loop__listInstance {
+    animation: slideAnim linear infinite;
+  }
+  
+  .loop__listInstance {
+    @apply flex w-max animate-none;
+  }
+  

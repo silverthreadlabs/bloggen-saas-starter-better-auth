@@ -151,7 +151,7 @@ export function Pricing({
 						)}
 					>
 						{plan.isPopular && (
-							<div className="absolute top-0 right-0 bg-primary py-0.5 px-2 rounded-bl-sm rounded-tr-sm flex items-center">
+							<div className="absolute top-2 right-2 bg-primary py-0.5 px-2 rounded-bl-sm rounded-tr-sm flex items-center">
 								<Star className="text-primary-text h-4 w-4 fill-current" />
 								<span className="text-primary-text ml-1 font-sans font-semibold">
 									Popular
@@ -207,7 +207,7 @@ export function Pricing({
 								onClick={async () => {
 									await client.subscription.upgrade({
 										plan: plan.name.toLowerCase(),
-										successUrl: "/dashboard",
+										successUrl: "/setting",
 									});
 								}}
 								size="default"

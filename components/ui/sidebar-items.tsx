@@ -16,7 +16,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ label, href, icon }) => {
   return (
     <Link
       href={href}
-      className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+      className={`flex items-center gap-3 px-4 py-3 rounded-sm text-sm font-medium transition-all duration-200 ${
         isActive
           ? 'bg-primary-bg text-primary-text border border-primary-border shadow-sm'
           : 'text-canvas-text hover:bg-canvas-bg-hover hover:text-canvas-text-contrast'

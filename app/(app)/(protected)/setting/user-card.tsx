@@ -96,7 +96,7 @@ export default function UserCard(props: {
         <Card className='bg-canvas-bg'>
             <CardHeader className='rounded-t-lg bg-canvas-bg-subtle border-canvas-border border-b'>
                 <div className='flex items-center gap-3'>
-                    <div className='bg-primary-bg flex h-10 w-10 items-center justify-center rounded-lg'>
+                    <div className='bg-primary-bg flex h-10 w-10 items-center justify-center rounded-sm'>
                         <User className='text-primary-solid h-5 w-5' />
                     </div>
                     <div className='flex flex-col gap-1'>
@@ -108,7 +108,7 @@ export default function UserCard(props: {
             <CardContent className='p-6'>
                 <div className='space-y-6'>
                     {/* User Profile Section */}
-                    <div className='border-canvas-border rounded-lg border p-4'>
+                    <div className='border-canvas-border rounded-sm border p-4'>
                         <div className='flex flex-col sm:flex-row gap-4 items-start justify-between'>
                             <div className='flex items-center gap-4'>
                                 <Avatar className='h-16 w-16'>
@@ -218,7 +218,7 @@ export default function UserCard(props: {
                                     return (
                                         <div
                                             key={session.id}
-                                            className='border-canvas-border bg-canvas-bg flex items-center justify-between rounded-lg border p-3'>
+                                            className='border-canvas-border bg-canvas-bg flex items-center justify-between rounded-sm border p-3'>
                                             <div className='flex items-center gap-3'>
                                                 <div className='bg-primary-bg flex h-8 w-8 items-center justify-center rounded-md'>
                                                     {device.type === 'mobile' ? (

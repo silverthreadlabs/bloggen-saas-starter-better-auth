@@ -25,7 +25,7 @@ import { Session } from '@/lib/auth/auth-types';
 import { Edit, User, Mail, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { SubscriptionTierLabel } from '@/components/tier-labels';
-import { Component as ChangePlanComponent } from '@/app/(app)/(protected)/dashboard/change-plan';
+import { Component as ChangePlanComponent } from '@/app/(app)/(protected)/setting/change-plan';
 
 interface SubscriptionData {
     plan?: string;
@@ -95,7 +95,7 @@ export default function ProfileSection({ session, subscription }: ProfileSection
             <Card className="border-canvas-border bg-canvas-bg">
                 <CardHeader className="border-b border-canvas-border bg-canvas-bg-subtle">
                     <div className="flex items-center gap-3">
-                        <div className="bg-primary-bg flex h-10 w-10 items-center justify-center rounded-lg">
+                        <div className="bg-primary-bg flex h-10 w-10 items-center justify-center rounded-sm">
                             <User className="text-primary-solid h-5 w-5" />
                         </div>
                         <div>
@@ -224,7 +224,7 @@ function EditUserDialog() {
                         <Label htmlFor="image">Profile Picture</Label>
                         <div className="flex items-center gap-4">
                             {imagePreview && (
-                                <div className="relative h-16 w-16 overflow-hidden rounded-lg border border-canvas-border">
+                                <div className="relative h-16 w-16 overflow-hidden rounded-sm border border-canvas-border">
                                     <Image 
                                         src={imagePreview} 
                                         alt="Profile preview" 

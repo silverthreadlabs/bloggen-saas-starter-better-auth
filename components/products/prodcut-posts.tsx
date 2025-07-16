@@ -40,7 +40,7 @@ export function ProductPosts() {
                 <div className='mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2'>
                     {sortedProducts.map((post) => (
                         <Link key={post.slug} href={`/products/${post.slug}`} className='group block'>
-                            <div className='bg-canvas-bg border-canvas-active hover:border-canvas-line h-full rounded-lg border px-8 py-5 backdrop-blur-sm transition-all duration-300'>
+                            <div className='bg-canvas-bg border-canvas-active hover:border-canvas-line h-full rounded-sm border px-8 py-5 backdrop-blur-sm transition-all duration-300'>
                                 <div className='flex h-full flex-col'>
                                     <div className='from-canvas-bg via-primary-bg-subtle to-primary-bg hover:via-primary-bg hover:to-primary-bg-hover w-fit rounded-sm bg-gradient-to-br p-2.5 transition-transform duration-300 group-hover:scale-110'>
                                         <FaSnowflake className='text-primary-text group-hover:text-primary-text-contrast h-4 w-4 transition-colors duration-300' />

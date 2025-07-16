@@ -51,7 +51,7 @@ export function BlogPosts({ isHomePage = false }: BlogPostsProps) {
                     <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
                         {displayedBlogs.map((post, index) => (
                             <Link key={post.slug} href={`/blog/${post.slug}`} className='group block'>
-                                <article className='bg-canvas-bg border-canvas-active hover:border-canvas-line rounded-lg border p-6 backdrop-blur-sm transition-all duration-300'>
+                                <article className='bg-canvas-bg border-canvas-active hover:border-canvas-line rounded-sm border p-6 backdrop-blur-sm transition-all duration-300'>
                                     <div className='relative mb-6 aspect-video overflow-hidden rounded-sm'>
                                         <Image
                                             src={post.metadata.image || ''}

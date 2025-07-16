@@ -3,42 +3,80 @@
 import { useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
+import {
+    HiChartBar,
+    HiCode,
+    HiCog,
+    HiGlobeAlt,
+    HiLightningBolt,
+    HiShieldCheck,
+    HiSparkles,
+    HiTrendingUp
+} from 'react-icons/hi';
 
 interface Feature {
     id: number;
     title: string;
     description: string;
-    details: string;
+    icon: React.ReactNode;
+    color: string;
+    gradient: string;
 }
 
 const featuresData: Feature[] = [
     {
         id: 1,
-        title: 'Plug‑in MDX',
-        description: 'Instant Content Integration',
-        details:
-            'Bloggen AI exports MDX posts that drop straight into the /content folder - no edits needed. Your content renders instantly, making content management seamless and efficient.'
+        title: 'Instant MDX Integration',
+        description:
+            'Drop AI-generated MDX content directly into your /content folder. No editing required - content renders instantly with perfect formatting and styling.',
+        icon: <HiCode className='h-6 w-6' />,
+        color: 'from-blue-500 to-blue-600',
+        gradient: 'from-blue-500/10 to-blue-600/5'
     },
     {
         id: 2,
-        title: 'Designrift Tshemeing',
-        description: 'Powerful Theme Creation',
-        details:
-            'Create stunning themes for your web application leveraging Radix color palettes for cohesive styling. Build beautiful, consistent user interfaces with our comprehensive theming system.'
+        title: 'Lightning Fast Performance',
+        description:
+            'Built on Next.js 15 with optimized Core Web Vitals. Achieve perfect Lighthouse scores out of the box with advanced caching and optimization.',
+        icon: <HiLightningBolt className='h-6 w-6' />,
+        color: 'from-yellow-500 to-orange-500',
+        gradient: 'from-yellow-500/10 to-orange-500/5'
     },
     {
         id: 3,
-        title: 'SEO All Set',
-        description: 'Complete SEO Infrastructure',
-        details:
-            'Launch with confidence knowing all SEO essentials are pre-configured. From sitemaps and robots.txt to JSON-LD and dynamic OG images, plus an RSS feed - everything is pre-wired.'
+        title: 'Production-Ready Security',
+        description:
+            'Enterprise-grade security features built-in. Authentication, authorization, and data protection configured from day one with best practices.',
+        icon: <HiShieldCheck className='h-6 w-6' />,
+        color: 'from-green-500 to-emerald-600',
+        gradient: 'from-green-500/10 to-emerald-600/5'
     },
     {
         id: 4,
-        title: 'One‑Command Launch',
-        description: 'Effortless Deployment',
-        details:
-            'Get started in seconds with a single command: npx create-bloggen-app. Push to Vercel and your typed Next.js 15 template goes live immediately.'
+        title: 'SEO Supercharged',
+        description:
+            'Complete SEO infrastructure pre-configured: JSON-LD structured data, dynamic OG images, sitemaps, robots.txt, and RSS feeds for maximum visibility.',
+        icon: <HiTrendingUp className='h-6 w-6' />,
+        color: 'from-purple-500 to-purple-600',
+        gradient: 'from-purple-500/10 to-purple-600/5'
+    },
+    {
+        id: 5,
+        title: 'Global Scale Ready',
+        description:
+            'Internationalization support, CDN optimization, and global deployment patterns built into the architecture for worldwide reach.',
+        icon: <HiGlobeAlt className='h-6 w-6' />,
+        color: 'from-indigo-500 to-blue-600',
+        gradient: 'from-indigo-500/10 to-blue-600/5'
+    },
+    {
+        id: 6,
+        title: 'Developer Experience',
+        description:
+            'TypeScript, ESLint, Prettier, hot reload, and comprehensive tooling for the best developer experience possible. Ship with confidence.',
+        icon: <HiCog className='h-6 w-6' />,
+        color: 'from-gray-500 to-gray-600',
+        gradient: 'from-gray-500/10 to-gray-600/5'
     }
 ];
 
@@ -72,122 +110,124 @@ const itemVariants = {
 };
 
 export default function Features() {
-    const [activeFeature, setActiveFeature] = useState<number>(1);
-
-    const handleFeatureHover = (featureId: number) => {
-        setActiveFeature(featureId);
-    };
-
-    const currentFeature = featuresData.find((feature) => feature.id === activeFeature) || featuresData[0];
-
     return (
-        <section className='py:10 w-full px-4 sm:px-6 lg:px-8 xl:py-16'>
-            <div className='mx-auto mb-16 max-w-7xl'>
-                {/* Header */}
+        <section className='relative w-full overflow-hidden px-4 py-24 sm:px-6 lg:px-8 xl:py-32'>
+            {/* Clean Professional Background */}
+            <div className='absolute inset-0 overflow-hidden'>
+                {/* Simple gradient background */}
+                <div className='from-canvas-bg to-canvas-bg-subtle absolute inset-0 bg-gradient-to-b'></div>
+
+                {/* Subtle accent gradients */}
+                <div className='from-primary-bg/6 absolute top-0 left-0 h-[600px] w-[600px] bg-gradient-to-br via-transparent to-transparent'></div>
+                <div className='from-primary-solid/4 absolute right-0 bottom-0 h-[500px] w-[500px] bg-gradient-to-tl via-transparent to-transparent'></div>
+            </div>
+
+            <div className='relative z-10 mx-auto max-w-7xl'>
+                {/* Enhanced Header */}
                 <motion.div
-                    className='mb-16 text-center'
+                    className='mb-20 text-center'
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-100px' }}
-                    transition={{ duration: 0.6, ease: 'easeOut' }}>
-                    <h2 className='text-canvas-text-contrast mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl'>
-                        Powerful Features
+                    transition={{ duration: 0.8, ease: 'easeOut' }}>
+                    <div className='from-primary-bg/20 to-primary-bg/10 border-primary-border/30 mb-8 inline-flex items-center gap-2 rounded-full border bg-gradient-to-r px-4 py-2 text-sm font-medium shadow-lg backdrop-blur-sm'>
+                        <HiSparkles className='text-primary-solid h-4 w-4' />
+                        <span className='text-primary-text-contrast font-semibold'>Everything You Need</span>
+                    </div>
+
+                    <h2 className='text-canvas-text-contrast mb-8 text-4xl leading-[1.1] font-bold text-balance sm:text-5xl lg:text-6xl xl:text-7xl'>
+                        Ship Faster with
+                        <br />
+                        <span className='from-primary-solid via-primary-text to-primary-text-contrast relative bg-gradient-to-r bg-clip-text text-transparent'>
+                            Battle-Tested Features
+                        </span>
                     </h2>
-                    <p className='text-canvas-text mx-auto max-w-2xl text-lg text-balance'>
-                        Discover the tools and capabilities that make our platform the perfect solution for your needs.
+                    <p className='text-canvas-text mx-auto max-w-4xl text-xl leading-relaxed text-balance sm:text-2xl'>
+                        Every feature you need to build, launch, and scale your SaaS. Stop reinventing the wheel and
+                        focus on what makes your product unique.
                     </p>
                 </motion.div>
 
-                {/* Features Content */}
-                <div className='grid grid-cols-1 items-center gap-12 lg:grid-cols-2'>
-                    {/* Feature List - Left Side */}
-                    <motion.div
-                        className='space-y-2'
-                        variants={containerVariants}
-                        initial='hidden'
-                        whileInView='visible'
-                        viewport={{ once: true, margin: '-50px' }}>
-                        {featuresData.map((feature) => {
-                            const isActive = feature.id === activeFeature;
+                {/* Enhanced Features Grid */}
+                <motion.div
+                    className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-10'
+                    variants={containerVariants}
+                    initial='hidden'
+                    whileInView='visible'
+                    viewport={{ once: true, margin: '-50px' }}>
+                    {featuresData.map((feature, index) => (
+                        <motion.div
+                            key={feature.id}
+                            variants={{ itemVariants }}
+                            className='group relative'
+                            whileHover={{
+                                y: -10,
+                                transition: { type: 'spring', stiffness: 300, damping: 20 }
+                            }}>
+                            {/* Gradient glow effect */}
+                            <div
+                                className={`absolute -inset-0.5 bg-gradient-to-r ${feature.color} rounded-sm opacity-0 blur transition duration-500 group-hover:opacity-20`}></div>
 
-                            return (
-                                <motion.div
-                                    key={feature.id}
-                                    variants={{itemVariants}}
-                                    onMouseEnter={() => handleFeatureHover(feature.id)}
-                                    className={`group cursor-pointer rounded-lg border-l-4 p-6 transition-all duration-300 ease-out hover:shadow-md ${
-                                        isActive
-                                            ? 'border-primary-solid from-primary-bg to-primary-bg-subtle text-primary-text-contrast bg-gradient-to-r'
-                                            : 'border-canvas-line bg-canvas-bg hover:border-primary-border hover:bg-primary-bg-subtle'
-                                    }`}
-                                    whileHover={{
-                                        scale: 1.01,
-                                        transition: { type: 'spring', stiffness: 400, damping: 25 }
-                                    }}
-                                    whileTap={{ scale: 0.98 }}>
-                                    <motion.h3
-                                        className={`text-xl font-semibold tracking-wide transition-colors duration-300 ${
-                                            isActive
-                                                ? 'text-primary-text-contrast'
-                                                : 'text-canvas-text-contrast group-hover:text-primary-text-contrast'
-                                        }`}
-                                        layout>
-                                        {feature.title}
-                                    </motion.h3>
-                                </motion.div>
-                            );
-                        })}
-                    </motion.div>
+                            <div
+                                className={`from-canvas-base/90 to-canvas-base/50 border-canvas-border/50 hover:border-primary-border/50 group-hover:shadow-primary-bg/10 relative h-full rounded-sm border bg-gradient-to-br p-8 backdrop-blur-sm transition-all duration-500 hover:shadow-2xl lg:p-10`}>
+                                {/* Background gradient */}
+                                <div
+                                    className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} rounded-sm opacity-0 transition-opacity duration-500 group-hover:opacity-100`}></div>
 
-                    {/* Feature Description - Right Side */}
-                    <div className='flex items-center'>
-                        <div className='w-full'>
-                            <AnimatePresence mode='wait'>
-                                <motion.div
-                                    key={currentFeature.id}
-                                    variants={{
-                                        initial: { opacity: 0, y: 20 },
-                                        animate: { opacity: 1, y: 0 },
-                                        exit: { opacity: 0, y: -20 }
-                                    }}
-                                    initial='initial'
-                                    animate='animate'
-                                    exit='exit'
-                                    transition={{ duration: 0.2, ease: 'easeIn' }}
-                                    className='border-canvas-active hover:border-canvas-line bg-canvas-base max-h-80 cursor-default rounded-2xl border p-10 shadow-lg'>
-                                    {/* Feature Badge */}
-                                    <motion.div
-                                        className='mb-6'
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        transition={{ duration: 0.3 }}>
-                                        <span className='bg-primary-bg text-primary-text-contrast inline-flex items-center rounded-xl px-3 py-2 text-sm font-medium'>
-                                            {currentFeature.title}
-                                        </span>
-                                    </motion.div>
+                                {/* Content */}
+                                <div className='relative z-10'>
+                                    {/* Icon with enhanced styling */}
+                                    <div className='relative mb-8'>
+                                        <div className='from-primary-solid/20 to-primary-text/20 absolute inset-0 rounded-sm bg-gradient-to-r opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100'></div>
+                                        <div
+                                            className={`relative inline-flex h-16 w-16 items-center justify-center rounded-sm bg-gradient-to-r ${feature.color} text-white shadow-lg shadow-black/10 transition-all duration-300 group-hover:scale-110`}>
+                                            {feature.icon}
+                                        </div>
+                                    </div>
 
-                                    {/* Feature Title */}
-                                    <motion.h3
-                                        className='text-canvas-text-contrast mb-4 text-2xl font-bold sm:text-3xl'
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        transition={{ duration: 0.3 }}>
-                                        {currentFeature.description}
-                                    </motion.h3>
+                                    {/* Text Content */}
+                                    <div>
+                                        <h3 className='text-canvas-text-contrast group-hover:text-primary-text-contrast mb-4 text-xl font-bold transition-colors duration-300 lg:text-2xl'>
+                                            {feature.title}
+                                        </h3>
+                                        <p className='text-canvas-text group-hover:text-canvas-text-contrast/90 text-lg leading-relaxed transition-colors duration-300'>
+                                            {feature.description}
+                                        </p>
+                                    </div>
 
-                                    {/* Feature Details */}
-                                    <motion.p
-                                        className='text-canvas-text mb-6 text-lg leading-relaxed'
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        transition={{ duration: 0.3 }}>
-                                        {currentFeature.details}
-                                    </motion.p>
-                                </motion.div>
-                            </AnimatePresence>
+                                    {/* Decorative element */}
+                                    <div className='absolute right-6 bottom-6 h-8 w-8 opacity-0 transition-opacity duration-500 group-hover:opacity-20'>
+                                        <div
+                                            className={`h-full w-full bg-gradient-to-br ${feature.color} rounded-full blur-sm`}></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </motion.div>
+
+                {/* Enhanced Bottom CTA */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    className='mt-24 text-center'>
+                    <div className='relative inline-block'>
+                        {/* Glow effect */}
+                        <div className='from-primary-solid/20 via-primary-text/20 to-primary-solid/20 absolute -inset-2 rounded-sm bg-gradient-to-r blur-xl'></div>
+
+                        <div className='from-canvas-base/60 to-canvas-base/30 border-canvas-border/30 relative rounded-sm border bg-gradient-to-r px-8 py-6 shadow-2xl backdrop-blur-sm'>
+                            <div className='flex items-center justify-center gap-3'>
+                                <HiChartBar className='text-primary-solid h-6 w-6' />
+                                <span className='text-canvas-text-contrast text-lg font-semibold'>
+                                    Join <span className='text-primary-text-contrast font-bold'>1000+</span> developers
+                                    building the future
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </section>
     );

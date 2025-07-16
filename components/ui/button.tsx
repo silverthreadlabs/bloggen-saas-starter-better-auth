@@ -18,7 +18,7 @@ const Spinner = () => (
 );
 
 const buttonVariants = cva(
-    'items-center justify-center rounded-lg font-medium transition-all duration-300 ease-out disabled:opacity-50 hover:cursor-pointer disabled:cursor-not-allowed leading-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 select-none hover:shadow-[0_1px_3px_0_rgb(0,0,0,0.1),0_1px_2px_-1px_rgb(0,0,0,0.1)]',
+    'items-center justify-center rounded-sm font-medium transition-all duration-300 ease-out disabled:opacity-50 hover:cursor-pointer disabled:cursor-not-allowed leading-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 select-none hover:shadow-[0_1px_3px_0_rgb(0,0,0,0.1),0_1px_2px_-1px_rgb(0,0,0,0.1)]',
 
     {
         variants: {

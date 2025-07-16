@@ -34,7 +34,7 @@ export default function InvitationPage() {
 				setError(res.error.message || "An error occurred");
 			} else {
 				setInvitationStatus("accepted");
-				router.push(`/dashboard`);
+				router.push(`/setting`);
 			}
 		} catch (error) {
 			setError("An error occurred");

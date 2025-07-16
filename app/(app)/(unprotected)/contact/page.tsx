@@ -28,7 +28,7 @@ const LoadingSpinner = () => (
 
 const ContentWrapper = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
     <div
-        className={`from-canvas-bg via-canvas-subtle to-canvas-bg border-canvas-line overflow-hidden rounded-xl border bg-gradient-to-bl from-0% via-50% to-100% shadow-sm ${className}`}>
+        className={`from-canvas-bg via-canvas-subtle to-canvas-bg border-canvas-line overflow-hidden rounded-sm border bg-gradient-to-bl from-0% via-50% to-100% shadow-sm ${className}`}>
         {children}
     </div>
 );

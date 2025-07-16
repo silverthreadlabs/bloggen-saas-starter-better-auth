@@ -143,7 +143,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ className = '' }) => {
 
             {/* Product Card */}
             <div
-                className={`relative transform overflow-hidden rounded-3xl border transition-all duration-700 ${isAnimating ? 'scale-95 opacity-70 ' : ' scale-100 opacity-100'} ${theme.cardBg} ${theme.border} mx-auto`}>
+                className={`relative transform overflow-hidden rounded-sm border transition-all duration-700 ${isAnimating ? 'scale-95 opacity-70 ' : ' scale-100 opacity-100'} ${theme.cardBg} ${theme.border} mx-auto`}>
                 {/* Horizontal Layout */}
                 <div className=''>
                     {/* Left Side - Product Image */}
@@ -178,7 +178,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ className = '' }) => {
                                     <button
                                         key={size}
                                         onClick={() => setSelectedSize(size)}
-                                        className={`rounded-xl px-2 py-2 text-sm font-semibold transition-all duration-300 hover:cursor-pointer ${selectedSize === size ? `${theme.sizeSelected}` : `${theme.sizeUnselected}`} `}>
+                                        className={`rounded-sm px-2 py-2 text-sm font-semibold transition-all duration-300 hover:cursor-pointer ${selectedSize === size ? `${theme.sizeSelected}` : `${theme.sizeUnselected}`} `}>
                                         {size}
                                     </button>
                                 ))}
@@ -188,12 +188,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ className = '' }) => {
                         {/* Action Buttons */}
                         <div className='flex gap-4'>
                             <button
-                                className={`flex-1 rounded-xl px-2 py-2 text-base font-bold hover:cursor-pointer ${theme.accent} transform text-white transition-all duration-300 hover:shadow-2xl`}>
+                                className={`flex-1 rounded-sm px-2 py-2 text-base font-bold hover:cursor-pointer ${theme.accent} transform text-white transition-all duration-300 hover:shadow-2xl`}>
                                 Buy Now
                             </button>
 
                             <button
-                                className={`flex-1 rounded-xl px-2 py-2 text-base font-bold hover:cursor-pointer ${theme.accentSecondary} transform border-2 transition-all duration-300 hover:shadow-xl`}>
+                                className={`flex-1 rounded-sm px-2 py-2 text-base font-bold hover:cursor-pointer ${theme.accentSecondary} transform border-2 transition-all duration-300 hover:shadow-xl`}>
                                 Add to Cart
                             </button>
                         </div>

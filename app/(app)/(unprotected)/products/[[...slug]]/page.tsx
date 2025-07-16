@@ -100,7 +100,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
                                         item.value && (
                                             <div
                                                 key={index}
-                                                className='bg-canvas-bg border-canvas-border hover:border-canvas-border-hover rounded-lg border p-6 backdrop-blur-sm transition-all duration-300'>
+                                                className='bg-canvas-bg border-canvas-border hover:border-canvas-border-hover rounded-sm border p-6 backdrop-blur-sm transition-all duration-300'>
                                                 <div className='text-canvas-text mb-1 text-sm'>{item.label}</div>
                                                 <div className='text-canvas-text-contrast text-lg font-semibold'>
                                                     {item.value}
@@ -134,7 +134,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
                         {/* Sidebar */}
                         <div className='lg:col-span-1'>
                             <div className='sticky top-24 space-y-6'>
-                                <div className='bg-canvas-bg border-canvas-border hover:border-canvas-border-hover rounded-lg border p-6 backdrop-blur-sm transition-all duration-300'>
+                                <div className='bg-canvas-bg border-canvas-border hover:border-canvas-border-hover rounded-sm border p-6 backdrop-blur-sm transition-all duration-300'>
                                     <h5 className='text-canvas-text-contrast mb-4 text-lg leading-relaxed font-semibold tracking-normal md:text-xl'>
                                         Quick Links
                                     </h5>

@@ -10,9 +10,9 @@ interface FeatureCardProps {
 function FeatureCard({ icon, title, descriptionStart, code, descriptionEnd, link }: FeatureCardProps) {
     return (
         <div className='group relative'>
-            <div className='bg-canvas-bg border-canvas-active hover:border-canvas-line cursor-default rounded-xl border p-6 backdrop-blur-sm transition-all duration-300 ease-in-out'>
+            <div className='bg-canvas-bg border-canvas-active hover:border-canvas-line cursor-default rounded-sm border p-6 backdrop-blur-sm transition-all duration-300 ease-in-out'>
                 <div className='flex items-start gap-4'>
-                    <div className='rounded-lg bg-gradient-to-br from-canvas-bg to-canvas-line p-3 transition-transform duration-300 ease-out group-hover:scale-[1.05]'>
+                    <div className='rounded-sm bg-gradient-to-br from-canvas-bg to-canvas-line p-3 transition-transform duration-300 ease-out group-hover:scale-[1.05]'>
                         <div className='text-canvas-solid group-hover:text-primary-solid transition-colors duration-300 ease-out'>
                             {icon}
                         </div>

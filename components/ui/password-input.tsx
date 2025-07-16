@@ -93,7 +93,7 @@ const PasswordInput = React.forwardRef<
 				role="button"
 				tabIndex={disabled ? -1 : 0}
 			>
-				{showPassword && !disabled ? (
+				{showPassword ? (
 					<EyeIcon className="h-4 w-4" aria-hidden="true" />
 				) : (
 					<EyeOffIcon className="h-4 w-4" aria-hidden="true" />

@@ -65,7 +65,7 @@ export default function SignIn() {
       const result = await signIn.email({
         email,
         password,
-        callbackURL: "/dashboard",
+        callbackURL: "/setting",
         fetchOptions: {
           onError: (ctx) => {
             setLoadingProvider(null);
@@ -73,15 +73,15 @@ export default function SignIn() {
           },
           onSuccess: () => {
             toast.success("Sign in successful! Redirecting...");
-            // router.push( "/dashboard");
-            window.location.href = "/dashboard";
+            // router.push( "/setting");
+            window.location.href = "/setting";
 
           },
         },
       });
 
       if (result && 'redirect' in result) {
-        router.push("/dashboard");
+        router.push("/setting");
       } else {
         setLoadingProvider(null);
       }
@@ -97,7 +97,7 @@ export default function SignIn() {
     try {
       await signIn.social({
         provider,
-        callbackURL: "/dashboard",
+        callbackURL: "/setting",
         fetchOptions: {
           onError: () => {
             setLoadingProvider(null);

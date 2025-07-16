@@ -130,7 +130,7 @@ export function Rate({
       </div>
       <CollapsibleContent className="mt-3">
         {previous ? (
-          <div className="px-3 py-6 flex flex-col items-center gap-3 bg-fd-card text-fd-muted-foreground text-sm text-center rounded-xl">
+          <div className="px-3 py-6 flex flex-col items-center gap-3 bg-fd-card text-fd-muted-foreground text-sm text-center rounded-sm">
             <p>Thank you for your feedback!</p>
             <div className="flex flex-row items-center gap-2">
               <a
@@ -170,7 +170,7 @@ export function Rate({
               required
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="border rounded-lg bg-fd-secondary text-fd-secondary-foreground p-3 resize-none focus-visible:outline-none placeholder:text-fd-muted-foreground"
+              className="border rounded-sm bg-fd-secondary text-fd-secondary-foreground p-3 resize-none focus-visible:outline-none placeholder:text-fd-muted-foreground"
               placeholder="Leave your feedback..."
               onKeyDown={(e) => {
                 if (!e.shiftKey && e.key === 'Enter') {

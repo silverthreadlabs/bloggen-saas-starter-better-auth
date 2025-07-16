@@ -73,7 +73,7 @@ function Component(props: {
 			<DialogContent className="max-w-2xl">
 				<div className="mb-6 flex flex-col gap-3">
 					<div
-						className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary-bg border border-primary-border"
+						className="flex size-12 shrink-0 items-center justify-center rounded-sm bg-primary-bg border border-primary-border"
 						aria-hidden="true"
 					>
 						{props.currentPlan ? (
@@ -108,7 +108,7 @@ function Component(props: {
 								<div
 									key={plan.id}
 									className={cn(
-										"relative flex w-full items-start gap-4 rounded-xl border p-4 transition-all",
+										"relative flex w-full items-start gap-4 rounded-sm border p-4 transition-all",
 										isSelected
 											? "border-primary-border bg-primary-bg shadow-sm"
 											: "border-canvas-border bg-canvas-bg hover:border-canvas-border-hover hover:bg-canvas-bg-hover"
@@ -122,7 +122,7 @@ function Component(props: {
 									<div className="flex-1 space-y-2">
 										<div className="flex items-center gap-3">
 											<div className={cn(
-												"flex size-8 items-center justify-center rounded-lg",
+												"flex size-8 items-center justify-center rounded-sm",
 												isSelected ? "bg-primary-solid text-primary-on-primary" : "bg-canvas-bg-active text-canvas-text"
 											)}>
 												<Icon size={16} />
@@ -156,7 +156,7 @@ function Component(props: {
 						})}
 					</RadioGroup>
 
-					<div className="rounded-lg border border-warning-border bg-warning-bg p-3">
+					<div className="rounded-sm border border-warning-border bg-warning-bg p-3">
 						<p className="text-xs text-warning-text text-center">
 							Note: All plan changes take effect immediately. You'll be charged the new amount on your next billing cycle.
 						</p>
@@ -174,7 +174,8 @@ function Component(props: {
 								if (selectedPlan === "enterprise") {
 									// Handle enterprise contact
 									toast.info("Please contact our sales team for enterprise pricing");
-									return;
+									
+return;
 								}
 								await client.subscription.upgrade(
 									{
@@ -211,7 +212,7 @@ function Component(props: {
 								onClick={async () => {
 									await client.subscription.cancel(
 										{
-											returnUrl: "/dashboard",
+											returnUrl: "/setting",
 										},
 										{
 											onError: (ctx) => {

@@ -69,7 +69,7 @@ export function OrganizationCard(props: {
 			<CardHeader className="rounded-t-lg border-b border-canvas-line bg-canvas-bg-subtle">
 				<div className="flex items-center justify-between">
 					<div className="flex items-center gap-3">
-						<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-bg">
+						<div className="flex h-10 w-10 items-center justify-center rounded-sm bg-primary-bg">
 							<Building2 className="h-5 w-5 text-primary-solid" />
 						</div>
 						<div>
@@ -157,7 +157,7 @@ export function OrganizationCard(props: {
 
 					{/* Organization Info */}
 					{optimisticOrg && (
-						<div className="rounded-lg border border-canvas-border p-4">
+						<div className="rounded-sm border border-canvas-border p-4">
 							<div className="flex items-center gap-4">
 								<Avatar className="h-12 w-12 border-2 border-canvas-border">
 									<AvatarImage
@@ -201,7 +201,7 @@ export function OrganizationCard(props: {
 							{optimisticOrg?.members.map((member) => (
 								<div
 									key={member.id}
-									className="flex items-center justify-between rounded-lg border border-canvas-border bg-canvas-bg p-3"
+									className="flex items-center justify-between rounded-sm border border-canvas-border bg-canvas-bg p-3"
 								>
 									<div className="flex items-center gap-3">
 										<Avatar className="h-8 w-8">
@@ -241,7 +241,7 @@ export function OrganizationCard(props: {
 								</div>
 							))}
 							{!optimisticOrg?.id && (
-								<div className="flex items-center justify-between rounded-lg border border-canvas-border bg-canvas-bg p-3">
+								<div className="flex items-center justify-between rounded-sm border border-canvas-border bg-canvas-bg p-3">
 									<div className="flex items-center gap-3">
 										<Avatar className="h-8 w-8">
 											<AvatarImage src={session?.user.image || undefined} />
@@ -279,7 +279,7 @@ export function OrganizationCard(props: {
 										initial="hidden"
 										animate="visible"
 										exit="exit"
-										className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between rounded-lg border border-warning-border bg-warning-bg p-3"
+										className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between rounded-sm border border-warning-border bg-warning-bg p-3"
 									>
 										<div className="flex items-center gap-3">
 											<div className="flex h-8 w-8 items-center justify-center rounded-md bg-warning-bg-active">

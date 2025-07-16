@@ -89,7 +89,7 @@ export default function Header({ session }: { session: Session }) {
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align='end' className='w-48'>
                                     <DropdownMenuItem className='cursor-pointer' asChild>
-                                        <Link href='/dashboard' className='flex items-center'>
+                                        <Link href='/setting' className='flex items-center'>
                                             <Settings className='mr-2 h-4 w-4' />
                                             <span>Settings</span>
                                         </Link>
@@ -175,8 +175,8 @@ export default function Header({ session }: { session: Session }) {
                                         Contact
                                     </Button>
                                 </Link>
-                                {session ? (
-                                    <Link href='/dashboard' className='flex'>
+                                {session && (
+                                    <Link href='/setting' className='flex'>
                                         <Button
                                             color='primary'
                                             size='default'
@@ -184,22 +184,45 @@ export default function Header({ session }: { session: Session }) {
                                             aria-label='Contact Us'
                                             name='Contact Us'
                                             fullWidth>
-                                            Dashboard
-                                        </Button>
-                                    </Link>
-                                ) : (
-                                    <Link href='/sign-in' className='flex'>
-                                        <Button
-                                            color='primary'
-                                            size='default'
-                                            variant='outline'
-                                            aria-label='Contact Us'
-                                            name='Contact Us'
-                                            fullWidth>
-                                            Sign In
+                                            Settings
                                         </Button>
                                     </Link>
                                 )}
+                                <div className='flex flex-col gap-2'>
+                                    {session ? (
+                                        <Button
+                                            color='primary'
+                                            size='default'
+                                            variant='outline'
+                                            aria-label='Sign Out'
+                                            name='Sign Out'
+                                            fullWidth
+                                            onClick={async () => {
+                                                await signOut({
+                                                    fetchOptions: {
+                                                        onSuccess: () => {
+                                                            window.location.href = '/';
+                                                        }
+                                                    }
+                                                });
+                                            }}>
+                                            Sign Out
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            color='primary'
+                                            size='default'
+                                            variant='outline'
+                                            aria-label='Sign In'
+                                            name='Sign In'
+                                            fullWidth
+                                            onClick={() => {
+                                                window.location.href = '/sign-in';
+                                            }}>
+                                            Sign In
+                                        </Button>
+                                    )}
+                                </div>
                             </div>
                         </li>
                     </ul>
