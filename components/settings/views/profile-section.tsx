@@ -25,7 +25,7 @@ import { Session } from '@/lib/auth/auth-types';
 import { Edit, User, Mail, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { SubscriptionTierLabel } from '@/components/tier-labels';
-import { Component as ChangePlanComponent } from '@/app/(app)/(protected)/setting/change-plan';
+import { Component as ChangePlanComponent } from '@/app/(app)/(protected)/settings/change-plan';
 
 interface SubscriptionData {
     plan?: string;

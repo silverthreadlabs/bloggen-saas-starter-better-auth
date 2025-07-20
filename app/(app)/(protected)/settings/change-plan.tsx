@@ -212,7 +212,7 @@ return;
 								onClick={async () => {
 									await client.subscription.cancel(
 										{
-											returnUrl: "/setting",
+											returnUrl: "/settings",
 										},
 										{
 											onError: (ctx) => {

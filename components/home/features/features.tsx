@@ -131,7 +131,8 @@ export default function Features() {
                     viewport={{ once: true, margin: '-100px' }}
                     transition={{ duration: 0.8, ease: 'easeOut' }}>
                     <div className='from-primary-bg/20 to-primary-bg/10 border-primary-border/30 mb-8 inline-flex items-center gap-2 rounded-full border bg-gradient-to-r px-4 py-2 text-sm font-medium shadow-lg backdrop-blur-sm'>
-                        <HiSparkles className='text-primary-solid h-4 w-4' />
+                        {/* <HiSparkles className='text-primary-solid h-4 w-4' /> */}
+                        ✨ 
                         <span className='text-primary-text-contrast font-semibold'>Everything You Need</span>
                     </div>
 
@@ -178,7 +179,7 @@ export default function Features() {
                                 <div className='relative z-10'>
                                     {/* Icon with enhanced styling */}
                                     <div className='relative mb-8'>
-                                        <div className='from-primary-solid/20 to-primary-text/20 absolute inset-0 rounded-sm bg-gradient-to-r opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100'></div>
+                                        <div className='from-primary-solid/20 to-primary-text/20 absolute inset-0 rounded-sm bg-gradient-to-r opacity-0 blur-md transition-opacity duration-300'></div>
                                         <div
                                             className={`relative inline-flex h-16 w-16 items-center justify-center rounded-sm bg-gradient-to-r ${feature.color} text-white shadow-lg shadow-black/10 transition-all duration-300 group-hover:scale-110`}>
                                             {feature.icon}
@@ -196,37 +197,14 @@ export default function Features() {
                                     </div>
 
                                     {/* Decorative element */}
-                                    <div className='absolute right-6 bottom-6 h-8 w-8 opacity-0 transition-opacity duration-500 group-hover:opacity-20'>
+                                    {/* <div className='absolute right-6 bottom-6 h-8 w-8 opacity-0 transition-opacity duration-500 group-hover:opacity-20'>
                                         <div
                                             className={`h-full w-full bg-gradient-to-br ${feature.color} rounded-full blur-sm`}></div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </motion.div>
                     ))}
-                </motion.div>
-
-                {/* Enhanced Bottom CTA */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    className='mt-24 text-center'>
-                    <div className='relative inline-block'>
-                        {/* Glow effect */}
-                        <div className='from-primary-solid/20 via-primary-text/20 to-primary-solid/20 absolute -inset-2 rounded-sm bg-gradient-to-r blur-xl'></div>
-
-                        <div className='from-canvas-base/60 to-canvas-base/30 border-canvas-border/30 relative rounded-sm border bg-gradient-to-r px-8 py-6 shadow-2xl backdrop-blur-sm'>
-                            <div className='flex items-center justify-center gap-3'>
-                                <HiChartBar className='text-primary-solid h-6 w-6' />
-                                <span className='text-canvas-text-contrast text-lg font-semibold'>
-                                    Join <span className='text-primary-text-contrast font-bold'>1000+</span> developers
-                                    building the future
-                                </span>
-                            </div>
-                        </div>
-                    </div>
                 </motion.div>
             </div>
         </section>

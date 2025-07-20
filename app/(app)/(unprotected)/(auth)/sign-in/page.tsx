@@ -18,7 +18,7 @@ export default function Page() {
 				},
 				onSuccess: () => {
 					toast.success("Successfully signed in");
-					router.push("/setting");
+					router.push("/settings");
 				},
 			},
 		});

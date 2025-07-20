@@ -49,7 +49,7 @@ const demoPlans = [
 		],
 		description: "For large organizations with specific needs",
 		buttonText: "Contact Sales",
-		href: "/contact",
+		href: "/support",
 		isPopular: false,
 	},
 ];

@@ -69,7 +69,8 @@ export default function Performance() {
                     transition={{ duration: 0.6 }}
                     className='mb-16 text-center'>
                     <div className='from-primary-bg/20 to-primary-bg/10 border-primary-border/30 mb-8 inline-flex items-center gap-2 rounded-full border bg-gradient-to-r px-4 py-2 text-sm font-medium shadow-lg backdrop-blur-sm'>
-                        <HiAcademicCap className='text-primary-solid h-4 w-4' />
+                        {/* <HiAcademicCap className='text-primary-solid h-4 w-4' /> */}
+                        ✨ 
                         <span className='text-primary-text-contrast font-semibold'>Join the best teams</span>
                     </div>
 

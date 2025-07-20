@@ -26,7 +26,8 @@ export default function Cta() {
                             transition={{ duration: 0.5 }}
                             className='mb-8'>
                             <div className='inline-flex items-center gap-2 bg-primary-bg/20 border border-primary-border/30 rounded-full px-4 py-2 text-sm font-medium backdrop-blur-sm'>
-                                <FaRocket className='w-4 h-4 text-primary-solid' />
+                                {/* <FaRocket className='w-4 h-4 text-primary-solid' /> */}
+                                🚀
                                 <span className='text-primary-text-contrast'>Ready to Launch?</span>
                             </div>
                         </motion.div>
@@ -59,15 +60,18 @@ export default function Cta() {
                             transition={{ duration: 0.5, delay: 0.2 }}
                             className='flex flex-wrap justify-center items-center gap-6 mb-10'>
                             <div className='flex items-center gap-2 text-canvas-text'>
-                                <HiLightningBolt className='w-5 h-5 text-primary-solid' />
+                                {/* <HiLightningBolt className='w-5 h-5 text-primary-solid' /> */}
+                                ⚡
                                 <span className='font-medium'>5-minute setup</span>
                             </div>
                             <div className='flex items-center gap-2 text-canvas-text'>
-                                <HiSparkles className='w-5 h-5 text-primary-solid' />
+                                {/* <HiSparkles className='w-5 h-5 text-primary-solid' /> */}
+                                ✨
                                 <span className='font-medium'>Production ready</span>
                             </div>
                             <div className='flex items-center gap-2 text-canvas-text'>
-                                <FaRocket className='w-5 h-5 text-primary-solid' />
+                                {/* <FaRocket className='w-5 h-5 text-primary-solid' /> */}
+                                🚀
                                 <span className='font-medium'>Deploy anywhere</span>
                             </div>
                         </motion.div>

@@ -44,7 +44,8 @@ export default function Hero() {
                             transition={{ duration: 0.6, delay: 0.2 }}
                             className='mb-8'>
                             <div className='inline-flex items-center gap-2 bg-gradient-to-r from-primary-bg/20 to-primary-bg/10 border border-primary-border/30 rounded-full px-4 py-2 text-sm font-medium backdrop-blur-sm shadow-lg'>
-                                <HiSparkles className='w-4 h-4 text-primary-solid' />
+                                {/* <HiSparkles className='w-4 h-4 ' /> */}
+                                ✨ 
                                 <span className='text-primary-text-contrast font-semibold'>Powered by Next.js 15 & Better Auth</span>
                             </div>
                         </motion.div>

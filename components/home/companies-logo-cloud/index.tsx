@@ -93,7 +93,7 @@ export default function CompaniesLogoCloud() {
     };
     
 return (
-        <div className='w-full px-4 py-20 sm:px-6 lg:px-8 xl:py-32'>
+        <div className='w-full px-4 py-20 sm:px-6 lg:px-8 xl:py-20'>
             <section
                 id='Trusted Companies'
                 aria-label='Trusted by Companies'
@@ -103,9 +103,10 @@ return (
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className='mb-16 text-center'>
+                    className='mb-4 text-center'>
                     <div className='from-primary-bg/20 to-primary-bg/10 border-primary-border/30 mb-8 inline-flex items-center gap-2 rounded-full border bg-gradient-to-r px-4 py-2 text-sm font-medium shadow-lg backdrop-blur-sm'>
-                        <HiSparkles className='text-primary-solid h-4 w-4' />
+                        {/* <HiSparkles className='text-primary-solid h-4 w-4' /> */}
+                        ✨ 
                         <span className='text-primary-text-contrast font-semibold'>Trusted by Industry Leaders</span>
                     </div>
 

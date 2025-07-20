@@ -154,7 +154,7 @@ export default function AdminDashboard() {
 		try {
 			await client.admin.impersonateUser({ userId: id });
 			toast.success("Impersonated user");
-			router.push("/setting");
+			router.push("/settings");
 		} catch (error: unknown) {
 			const errorMessage = error instanceof Error ? error.message : "Failed to impersonate user";
 			toast.error(errorMessage);

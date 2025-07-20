@@ -8,7 +8,7 @@ const contactPageSchema: WithContext<ContactPage> = {
     '@type': 'ContactPage',
     name: 'Contact Us - Get in Touch',
     description: 'Have questions about our products, or just want to share your thoughts? We would love to hear from you!',
-    url: `${siteConfig.baseUrl}/contact`,
+    url: `${siteConfig.baseUrl}/support`,
     mainEntity: {
         '@type': 'Organization',
         name: siteConfig.publisher,
@@ -47,7 +47,7 @@ const contactPageSchema: WithContext<ContactPage> = {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'Contact',
-                item: `${siteConfig.baseUrl}/contact`
+                item: `${siteConfig.baseUrl}/support`
             }
         ]
     },
@@ -63,7 +63,7 @@ const contactPageSchema: WithContext<ContactPage> = {
             description: 'Send us a message using our contact form',
             target: {
                 '@type': 'EntryPoint',
-                urlTemplate: `${siteConfig.baseUrl}/contact`,
+                urlTemplate: `${siteConfig.baseUrl}/support`,
                 actionPlatform: ['http://schema.org/DesktopWebPlatform', 'http://schema.org/MobileWebPlatform']
             }
         },
@@ -73,7 +73,7 @@ const contactPageSchema: WithContext<ContactPage> = {
             description: 'Schedule a 30-minute consultation call',
             target: {
                 '@type': 'EntryPoint',
-                urlTemplate: `${siteConfig.baseUrl}/contact`,
+                urlTemplate: `${siteConfig.baseUrl}/support`,
                 actionPlatform: ['http://schema.org/DesktopWebPlatform', 'http://schema.org/MobileWebPlatform']
             }
         }
@@ -138,7 +138,7 @@ const contactPageSchema: WithContext<ContactPage> = {
 //             '@type': 'ListItem',
 //             position: 2,
 //             name: 'Contact',
-//             item: `${siteConfig.baseUrl}/contact`
+//             item: `${siteConfig.baseUrl}/support`
 //         }
 //     ]
 // };

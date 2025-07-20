@@ -32,7 +32,7 @@ const SocialLinks = () => {
             />
 
             <SocialLink
-                href='https://www.linkedin.com/company/106311628/admin/setting/'
+                href='https://www.linkedin.com/company/106311628/admin/settings/'
                 ariaLabel='Connect with SilverThread Labs on LinkedIn'
                 icon={
                     <FaLinkedinIn

@@ -97,7 +97,7 @@ export default function SecuritySection({ session, activeSessions: initialActive
                                         key={session.id}
                                         className={`flex items-center justify-between rounded-sm border p-4 ${
                                             isCurrentSession
-                                                ? 'border-primary-border bg-primary-bg'
+                                                ? 'border-primary-border bg-canvas-bg-subtle/40'
                                                 : 'border-canvas-border bg-canvas-bg-subtle'
                                         }`}>
                                         <div className='flex items-center gap-4'>
@@ -137,18 +137,18 @@ export default function SecuritySection({ session, activeSessions: initialActive
                                         </div>
                                         <div className='flex flex-col sm:flex-row items-start sm:items-center gap-2'>
                                             {isCurrentSession && (
-                                                <Badge className='bg-success-bg text-success-text border-success-border'>
+                                                <Badge variant="outline" className='bg-success-bg text-success-text border-success-border'>
                                                     Current
                                                 </Badge>
                                             )}
                                             <Button
                                                 size='sm'
                                                 variant={isCurrentSession ? 'solid' : 'outline'}
-                                                className={
-                                                    isCurrentSession
-                                                        ? 'bg-alert-solid text-alert-on-solid hover:bg-alert-solid-hover'
-                                                        : 'border-alert-border text-alert-text hover:bg-alert-bg'
-                                                }
+                                                // className={
+                                                //     isCurrentSession
+                                                //         ? 'bg-alert-solid text-alert-on-solid hover:bg-alert-solid-hover'
+                                                //         : 'border-alert-border text-alert-text hover:bg-alert-bg'
+                                                // }
                                                 disabled={isTerminating === session.id}
                                                 onClick={async () => {
                                                     setIsTerminating(session.id);
@@ -277,7 +277,7 @@ export default function SecuritySection({ session, activeSessions: initialActive
                         ) : (
                             <Button
                                 variant='outline'
-                                className='border-alert-border text-alert-text hover:bg-alert-bg gap-2'
+                                // className='border-alert-border text-alert-text hover:bg-alert-bg gap-2'
                                 onClick={async () => {
                                     setIsSignOut(true);
                                     await signOut({

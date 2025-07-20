@@ -16,11 +16,14 @@ const BODY = 'Hello, I would like to discuss a potential project.';
 const MAILTO = `mailto:${EMAIL}?subject=${encodeURIComponent(SUBJECT)}&body=${encodeURIComponent(BODY)}`;
 
 const NAV_ITEMS = [
-    { href: '/about', label: 'About' },
-    { href: '/products', label: 'Products' },
+    // { href: '/about', label: 'About' },
+    { href: '/features', label: 'Features' },
+    { href: '/pricing', label: 'Pricing' },
     { href: '/blog', label: 'Blog' },
-    { href: '/contact', label: 'Contact' },
-    { href: '/terms', label: 'Terms' }
+    { href: '/support', label: 'Support' },
+    { href: '/settings', label: 'Settings' },
+    { href: '/terms', label: 'Terms' },
+    { href: '/privacy', label: 'Privacy' },
 ];
 
 const title = 'Silverthread Labs';
@@ -41,7 +44,7 @@ export default function Footer() {
                                 <div className='hidden dark:block'>
                                     <LogoDark />
                                 </div>
-                                <div className='text-canvas-text mt-0.5 flex text-sm font-bold'>SAAS Starter</div>
+                                <div className='text-canvas-text mt-0.5 flex text-sm font-bold'>SaaS Starter</div>
                             </div>
                             <nav className='flex flex-wrap gap-4'>
                                 {NAV_ITEMS.map(({ href, label }) => (

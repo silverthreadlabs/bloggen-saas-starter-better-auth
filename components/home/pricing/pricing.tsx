@@ -55,7 +55,7 @@ const demoPlans = [
         ],
         description: 'For large organizations with specific needs',
         buttonText: 'Contact Sales',
-        href: '/contact',
+        href: '/support',
         isPopular: false
     }
 ];
@@ -112,7 +112,7 @@ const demoPlans = [
 //             'Priority Feature Requests'
 //         ],
 //         cta: 'Contact Sales',
-//         ctaLink: '/contact',
+//         ctaLink: '/support',
 //         icon: <HiLightningBolt className="w-5 h-5" />,
 //         popular: false
 //     }
@@ -130,7 +130,8 @@ export default function HomePricing() {
                     viewport={{ once: true, margin: '-100px' }}
                     transition={{ duration: 0.6, ease: 'easeOut' }}>
                     <div className='bg-primary-bg/10 border-primary-border/20 mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium'>
-                        <HiSparkles className='text-primary-solid h-4 w-4' />
+                        {/* <HiSparkles className='text-primary-solid h-4 w-4' /> */}
+                        ✨ 
                         <span className='text-primary-text-contrast'>Simple Pricing</span>
                     </div>
 

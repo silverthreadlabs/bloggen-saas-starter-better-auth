@@ -20,9 +20,8 @@ import { LogOut, Settings } from 'lucide-react';
 import { FaBars, FaTimes, FaUser } from 'react-icons/fa';
 
 const NAV_ITEMS = [
-    { href: '/docs', label: 'Docs' },
-    { href: '/pricing', label: 'Pricing' },
     { href: '/features', label: 'Features' },
+    { href: '/pricing', label: 'Pricing' },
     { href: '/blog', label: 'Blog' }
 ];
 
@@ -45,7 +44,7 @@ export default function Header({ session }: { session: Session }) {
                         <div className='hidden dark:block'>
                             <LogoDark />
                         </div>
-                        <div className='text-canvas-text mt-0.5 flex text-sm font-bold'>SAAS Starter</div>
+                        <div className='text-canvas-text mt-0.5 flex text-sm font-bold'>SaaS Starter</div>
                     </Link>
 
                     {/* Desktop nav - hidden on small screens, visible on md and up */}
@@ -63,7 +62,7 @@ export default function Header({ session }: { session: Session }) {
                         </ul>
                     </nav>
                     <div className='hidden items-center gap-2 md:flex'>
-                        <Link href='/contact' className='flex'>
+                        {/* <Link href='/support' className='flex'>
                             <Button
                                 color='primary'
                                 size='default'
@@ -72,7 +71,7 @@ export default function Header({ session }: { session: Session }) {
                                 name='Contact Us'>
                                 Contact
                             </Button>
-                        </Link>
+                        </Link> */}
 
                         {session ? (
                             <DropdownMenu>
@@ -88,8 +87,8 @@ export default function Header({ session }: { session: Session }) {
                                     />
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align='end' className='w-48'>
-                                    <DropdownMenuItem className='cursor-pointer' asChild>
-                                        <Link href='/setting' className='flex items-center'>
+                                    <DropdownMenuItem className='cursor-pointer hover:bg-canvas-base transition-all duration-300' asChild>
+                                        <Link href='/settings' className='flex items-center'>
                                             <Settings className='mr-2 h-4 w-4' />
                                             <span>Settings</span>
                                         </Link>
@@ -105,7 +104,7 @@ export default function Header({ session }: { session: Session }) {
                                                 }
                                             });
                                         }}
-                                        className='text-alert-text flex cursor-pointer items-center'>
+                                        className='text-alert-text flex cursor-pointer items-center hover:bg-canvas-base transition-all duration-300'>
                                         <LogOut className='mr-2 h-4 w-4' />
                                         <span>Sign out</span>
                                     </DropdownMenuItem>
@@ -116,10 +115,10 @@ export default function Header({ session }: { session: Session }) {
                                 <Button
                                     color='primary'
                                     size='default'
-                                    variant='outline'
-                                    aria-label='Contact Us'
-                                    name='Contact Us'>
-                                    Sign In
+                                    variant='solid'
+                                    aria-label='Sign In'
+                                    name='Sign In'>
+                                    Get Started
                                 </Button>
                             </Link>
                         )}
@@ -170,19 +169,19 @@ export default function Header({ session }: { session: Session }) {
                         ))}
                         <li>
                             <div className='flex flex-col gap-3'>
-                                <Link href='/contact' onClick={toggleMobile} className='flex-1'>
+                                {/* <Link href='/support' onClick={toggleMobile} className='flex-1'>
                                     <Button color='primary' size='default' variant='solid' fullWidth name='Contact Us'>
                                         Contact
                                     </Button>
-                                </Link>
+                                </Link> */}
                                 {session && (
-                                    <Link href='/setting' className='flex'>
+                                    <Link href='/settings' className='flex'>
                                         <Button
                                             color='primary'
                                             size='default'
-                                            variant='outline'
-                                            aria-label='Contact Us'
-                                            name='Contact Us'
+                                            variant='solid'
+                                            aria-label='Settings'
+                                            name='Settings'
                                             fullWidth>
                                             Settings
                                         </Button>
@@ -212,14 +211,14 @@ export default function Header({ session }: { session: Session }) {
                                         <Button
                                             color='primary'
                                             size='default'
-                                            variant='outline'
+                                            variant='solid'
                                             aria-label='Sign In'
                                             name='Sign In'
                                             fullWidth
                                             onClick={() => {
                                                 window.location.href = '/sign-in';
                                             }}>
-                                            Sign In
+                                            Get Started
                                         </Button>
                                     )}
                                 </div>
