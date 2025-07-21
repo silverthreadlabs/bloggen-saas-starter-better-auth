@@ -140,19 +140,19 @@ function Component(props: {
 								!props.isTrial
 							}
 							onClick={async () => {
-								if (selectedPlan === "enterprise") {
-									return;
-								}
-								await client.subscription.upgrade(
-									{
-										plan: selectedPlan,
-									},
-									{
-										onError: (ctx) => {
-											toast.error(ctx.error.message);
-										},
-									},
-								);
+								// if (selectedPlan === "enterprise") {
+								// 	return;
+								// }
+								// await client.subscription.upgrade(
+								// 	{
+								// 		plan: selectedPlan,
+								// 	},
+								// 	{
+								// 		onError: (ctx) => {
+								// 			toast.error(ctx.error.message);
+								// 		},
+								// 	},
+								// );
 							}}
 						>
 							{selectedPlan === props.currentPlan?.toLowerCase()
@@ -173,16 +173,16 @@ function Component(props: {
 								variant="destructive"
 								className="w-full"
 								onClick={async () => {
-									await client.subscription.cancel(
-										{
-											returnUrl: "/dashboard",
-										},
-										{
-											onError: (ctx) => {
-												toast.error(ctx.error.message);
-											},
-										},
-									);
+									// await client.subscription.cancel(
+									// 	{
+									// 		returnUrl: "/dashboard",
+									// 	},
+									// 	{
+									// 		onError: (ctx) => {
+									// 			toast.error(ctx.error.message);
+									// 		},
+									// 	},
+									// );
 								}}
 							>
 								Cancel Plan

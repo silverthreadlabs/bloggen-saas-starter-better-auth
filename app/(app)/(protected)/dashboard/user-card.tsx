@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import { SubscriptionTierLabel } from '@/components/tier-labels';
+// import { SubscriptionTierLabel } from '@/components/tier-labels';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -51,15 +51,15 @@ import QRCode from 'react-qr-code';
 import { toast } from 'sonner';
 import { UAParser } from 'ua-parser-js';
 
-interface SubscriptionData {
-    plan?: string;
-    status?: string;
-}
+// interface SubscriptionData {
+//     plan?: string;
+//     status?: string;
+// }
 
 export default function UserCard(props: {
     session: Session | null;
     activeSessions: Session['session'][];
-    subscription?: SubscriptionData;
+    // subscription?: SubscriptionData;
 }) {
     const router = useRouter();
     const { data, isPending } = useSession();
@@ -74,20 +74,20 @@ export default function UserCard(props: {
     const [activeSessions, setActiveSessions] = useState(props.activeSessions);
     const removeActiveSession = (id: string) =>
         setActiveSessions(activeSessions.filter((session) => session.id !== id));
-    const { data: subscription } = useQuery({
-        queryKey: ['subscriptions'],
-        initialData: props.subscription ? props.subscription : null,
-        queryFn: async () => {
-            const res = await client.subscription.list({
-                fetchOptions: {
-                    throw: true
-                }
-            });
+    // const { data: subscription } = useQuery({
+    //     queryKey: ['subscriptions'],
+    //     initialData: props.subscription ? props.subscription : null,
+    //     queryFn: async () => {
+    //         const res = await client.subscription.list({
+    //             fetchOptions: {
+    //                 throw: true
+    //             }
+    //         });
 
 
-            return res.length ? res[0] : null;
-        }
-    });
+    //         return res.length ? res[0] : null;
+    //     }
+    // });
 
     return (
         <Card>
@@ -109,7 +109,7 @@ export default function UserCard(props: {
                             <div className='grid'>
                                 <div className='flex items-center gap-1'>
                                     <p className='text-sm leading-none font-medium'>{session?.user.name}</p>
-                                    {!!subscription && (
+                                    {/* {!!subscription && (
                                         <Badge className='w-min rounded-full p-px' variant='outline'>
                                             <svg
                                                 xmlns='http://www.w3.org/2000/svg'
@@ -121,7 +121,7 @@ export default function UserCard(props: {
                                                     d='m9.023 21.23l-1.67-2.814l-3.176-.685l.312-3.277L2.346 12L4.49 9.546L4.177 6.27l3.177-.685L9.023 2.77L12 4.027l2.977-1.258l1.67 2.816l3.176.684l-.312 3.277L21.655 12l-2.142 2.454l.311 3.277l-3.177.684l-1.669 2.816L12 19.973zm1.927-6.372L15.908 9.9l-.708-.72l-4.25 4.25l-2.15-2.138l-.708.708z'></path>
                                             </svg>
                                         </Badge>
-                                    )}
+                                    )} */}
                                 </div>
                                 <p className='text-sm'>{session?.user.email}</p>
                             </div>
@@ -129,14 +129,14 @@ export default function UserCard(props: {
                         <EditUserDialog />
                     </div>
                     <div className='flex items-center justify-between'>
-                        <div>
+                        {/* <div>
                             <SubscriptionTierLabel tier={(subscription as SubscriptionData)?.plan?.toLowerCase() as 'starter'} />
                             <SubscriptionTierLabel tier={(subscription as SubscriptionData)?.plan?.toLowerCase() as 'starter'} />
-                        </div>
-                        <Component
+                        </div> */}
+                        {/* <Component
                             currentPlan={(subscription as SubscriptionData)?.plan?.toLowerCase() as 'starter'}
                             isTrial={(subscription as SubscriptionData)?.status === 'trialing'}
-                        />
+                        /> */}
                     </div>
                 </div>
 

@@ -8,7 +8,7 @@ import { OrganizationCard } from './organization-card';
 import UserCard from './user-card';
 
 export default async function DashboardPage() {
-    const [session, activeSessions, deviceSessions, organization, subscriptions] = await Promise.all([
+    const [session, activeSessions, deviceSessions, organization] = await Promise.all([
         auth.api.getSession({
             headers: await headers()
         }),
@@ -21,9 +21,9 @@ export default async function DashboardPage() {
         auth.api.getFullOrganization({
             headers: await headers()
         }),
-        auth.api.listActiveSubscriptions({
-            headers: await headers()
-        })
+        // auth.api.listActiveSubscriptions({
+        //     headers: await headers()
+        // })
     ]).catch((e) => {
         console.log(e);
         throw redirect('/sign-in');
@@ -36,7 +36,7 @@ export default async function DashboardPage() {
                 <UserCard
                     session={JSON.parse(JSON.stringify(session))}
                     activeSessions={JSON.parse(JSON.stringify(activeSessions))}
-                    subscription={subscriptions.find((sub) => sub.status === 'active' || sub.status === 'trialing')}
+                    // subscription={subscriptions.find((sub) => sub.status === 'active' || sub.status === 'trialing')}
                 />
                 <OrganizationCard
                     session={JSON.parse(JSON.stringify(session))}

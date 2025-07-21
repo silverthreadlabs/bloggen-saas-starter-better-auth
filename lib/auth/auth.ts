@@ -19,8 +19,8 @@
 	// import { createPool } from "mysql2/promise";
 	import { nextCookies } from "better-auth/next-js";
 	import { passkey } from "better-auth/plugins/passkey";
-	import { stripe } from "@better-auth/stripe";
-	import { Stripe } from "stripe";
+	// import { stripe } from "@better-auth/stripe";
+	// import { Stripe } from "stripe";
 	// import Database from "better-sqlite3";
 	import { Pool } from "pg";
 
@@ -157,31 +157,31 @@
 					},
 				};
 			}),
-			stripe({
-				stripeClient: new Stripe(process.env.STRIPE_KEY || "sk_test_"),
-				stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET!,
-				subscription: {
-					enabled: true,
-					plans: [
-						{
-							name: "Starter",
-							priceId: STARTER_PRICE_ID.default,
-							annualDiscountPriceId: STARTER_PRICE_ID.annual,
-							freeTrial: {
-								days: 7,
-							},
-						},
-						{
-							name: "Professional",
-							priceId: PROFESSION_PRICE_ID.default,
-							annualDiscountPriceId: PROFESSION_PRICE_ID.annual,
-						},
-						{
-							name: "Enterprise",
-						},
-					],
-				},
-			}),
+			// stripe({
+			// 	stripeClient: new Stripe(process.env.STRIPE_KEY || "sk_test_"),
+			// 	stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET!,
+			// 	subscription: {
+			// 		enabled: true,
+			// 		plans: [
+			// 			{
+			// 				name: "Starter",
+			// 				priceId: STARTER_PRICE_ID.default,
+			// 				annualDiscountPriceId: STARTER_PRICE_ID.annual,
+			// 				freeTrial: {
+			// 					days: 7,
+			// 				},
+			// 			},
+			// 			{
+			// 				name: "Professional",
+			// 				priceId: PROFESSION_PRICE_ID.default,
+			// 				annualDiscountPriceId: PROFESSION_PRICE_ID.annual,
+			// 			},
+			// 			{
+			// 				name: "Enterprise",
+			// 			},
+			// 		],
+			// 	},
+			// }),
 		],
 		trustedOrigins: ["exp://"],
 	});
